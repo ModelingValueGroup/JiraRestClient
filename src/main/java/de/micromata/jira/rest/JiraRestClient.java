@@ -1,12 +1,16 @@
 package de.micromata.jira.rest;
 
-import de.micromata.jira.rest.client.*;
-import de.micromata.jira.rest.core.*;
-import de.micromata.jira.rest.core.domain.field.FieldBean;
-import de.micromata.jira.rest.core.misc.RestParamConstants;
-import de.micromata.jira.rest.core.misc.RestPathConstants;
-import de.micromata.jira.rest.core.util.HttpMethodFactory;
-import de.micromata.jira.rest.core.util.URIHelper;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
@@ -20,18 +24,27 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.*;
+import org.apache.http.impl.client.BasicAuthCache;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.BasicCredentialsProvider;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
+import de.micromata.jira.rest.client.IssueClient;
+import de.micromata.jira.rest.client.ProjectClient;
+import de.micromata.jira.rest.client.SearchClient;
+import de.micromata.jira.rest.client.SystemClient;
+import de.micromata.jira.rest.client.UserClient;
+import de.micromata.jira.rest.core.IssueClientImpl;
+import de.micromata.jira.rest.core.ProjectClientImpl;
+import de.micromata.jira.rest.core.SearchClientImpl;
+import de.micromata.jira.rest.core.SystemClientImpl;
+import de.micromata.jira.rest.core.UserClientImpl;
+import de.micromata.jira.rest.core.domain.field.FieldBean;
+import de.micromata.jira.rest.core.misc.RestParamConstants;
+import de.micromata.jira.rest.core.misc.RestPathConstants;
+import de.micromata.jira.rest.core.util.HttpMethodFactory;
+import de.micromata.jira.rest.core.util.URIHelper;
 
 /**
  * User: Christian Schulze
@@ -115,8 +128,7 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
             requestConfig = RequestConfig.custom().setProxy(proxyHost).build();
         }
 
-        URIBuilder uriBuilder = URIHelper.buildPath(baseUri, USER);
-        uriBuilder.addParameter(USERNAME, username);
+        URIBuilder uriBuilder = URIHelper.buildPath(baseUri, SELF);
         HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
         CloseableHttpResponse response = httpclient.execute(method, clientContext);
         int statusCode = response.getStatusLine().getStatusCode();
