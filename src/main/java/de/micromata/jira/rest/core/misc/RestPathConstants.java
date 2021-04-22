@@ -34,7 +34,7 @@ public interface RestPathConstants {
 
     String USER = "/user";
 
-    String SELF = "/self";
+    String MYSELF = "/myself";
 
     String SEARCH = "/search";
 

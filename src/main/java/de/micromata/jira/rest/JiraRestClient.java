@@ -128,7 +128,7 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
             requestConfig = RequestConfig.custom().setProxy(proxyHost).build();
         }
 
-        URIBuilder uriBuilder = URIHelper.buildPath(baseUri, SELF);
+        URIBuilder uriBuilder = URIHelper.buildPath(baseUri, MYSELF);
         HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
         CloseableHttpResponse response = httpclient.execute(method, clientContext);
         int statusCode = response.getStatusLine().getStatusCode();
