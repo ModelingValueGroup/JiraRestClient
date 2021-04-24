@@ -1,10 +1,15 @@
 package de.micromata.jira.rest.core.domain.meta;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.meta.fields.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
+import de.micromata.jira.rest.core.domain.meta.fields.ComponentFieldMetaBean;
+import de.micromata.jira.rest.core.domain.meta.fields.FieldMetaBean;
+import de.micromata.jira.rest.core.domain.meta.fields.IssueTypeFieldMetaBean;
+import de.micromata.jira.rest.core.domain.meta.fields.PriorityFieldMetaBean;
+import de.micromata.jira.rest.core.domain.meta.fields.ProjectFieldMetaBean;
+import de.micromata.jira.rest.core.domain.meta.fields.VersionsFieldMetaBean;
 
 /**
  * Created by cschulc on 16.03.16.

@@ -1,26 +1,24 @@
-
 package de.micromata.jira.rest.core.domain.field;
-
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.BaseBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FieldBean extends BaseBean{
+import com.google.gson.annotations.Expose;
+import de.micromata.jira.rest.core.domain.BaseBean;
 
+public class FieldBean extends BaseBean {
     @Expose
-    private Boolean custom;
+    private boolean      custom;
     @Expose
-    private Boolean orderable;
+    private boolean      orderable;
     @Expose
-    private Boolean navigable;
+    private boolean      navigable;
     @Expose
-    private Boolean searchable;
+    private boolean      searchable;
     @Expose
     private List<String> clauseNames = new ArrayList<>();
     @Expose
-    private Schema schema;
+    private SchemaBean   schema;
 
     public List<String> getClauseNames() {
         return clauseNames;
@@ -30,43 +28,43 @@ public class FieldBean extends BaseBean{
         this.clauseNames = clauseNames;
     }
 
-    public Boolean getCustom() {
+    public boolean isCustom() {
         return custom;
     }
 
-    public void setCustom(Boolean custom) {
+    public void setCustom(boolean custom) {
         this.custom = custom;
     }
 
-    public Boolean getNavigable() {
+    public boolean isNavigable() {
         return navigable;
     }
 
-    public void setNavigable(Boolean navigable) {
+    public void setNavigable(boolean navigable) {
         this.navigable = navigable;
     }
 
-    public Boolean getOrderable() {
+    public boolean isOrderable() {
         return orderable;
     }
 
-    public void setOrderable(Boolean orderable) {
+    public void setOrderable(boolean orderable) {
         this.orderable = orderable;
     }
 
-    public Schema getSchema() {
+    public SchemaBean getSchema() {
         return schema;
     }
 
-    public void setSchema(Schema schema) {
+    public void setSchema(SchemaBean schema) {
         this.schema = schema;
     }
 
-    public Boolean getSearchable() {
+    public boolean isSearchable() {
         return searchable;
     }
 
-    public void setSearchable(Boolean searchable) {
+    public void setSearchable(boolean searchable) {
         this.searchable = searchable;
     }
 }

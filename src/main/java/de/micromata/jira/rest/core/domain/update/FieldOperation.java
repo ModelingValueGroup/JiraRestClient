@@ -14,12 +14,10 @@ public class FieldOperation {
     @Expose
     private Object value;
 
-    public FieldOperation()
-    {
+    public FieldOperation() {
     }
 
-    public FieldOperation(String operation, Object value)
-    {
+    public FieldOperation(String operation, Object value) {
         this.operation = operation;
         this.value = value;
     }

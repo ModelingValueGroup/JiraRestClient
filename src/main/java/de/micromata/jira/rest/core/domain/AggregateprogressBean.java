@@ -3,35 +3,34 @@ package de.micromata.jira.rest.core.domain;
 import com.google.gson.annotations.Expose;
 
 public class AggregateprogressBean {
+    @Expose
+    private long percent;
+    @Expose
+    private long progress;
+    @Expose
+    private long total;
 
-    @Expose
-    private Integer percent;
-    @Expose
-    private Integer progress;
-    @Expose
-    private Integer total;
-
-    public Integer getPercent() {
+    public long getPercent() {
         return percent;
     }
 
-    public void setPercent(Integer percent) {
+    public void setPercent(long percent) {
         this.percent = percent;
     }
 
-    public Integer getProgress() {
+    public long getProgress() {
         return progress;
     }
 
-    public void setProgress(Integer progress) {
+    public void setProgress(long progress) {
         this.progress = progress;
     }
 
-    public Integer getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 }

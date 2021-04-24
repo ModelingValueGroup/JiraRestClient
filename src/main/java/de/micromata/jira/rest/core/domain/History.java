@@ -1,19 +1,18 @@
-
 package de.micromata.jira.rest.core.domain;
-
-import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.Expose;
+
 public class History {
 
     @Expose
-    private String id;
+    private String     id;
     @Expose
-    private UserBean author;
+    private UserBean   author;
     @Expose
-    private String created;
+    private String     created;
     @Expose
     private List<Item> items = new ArrayList<>();
 

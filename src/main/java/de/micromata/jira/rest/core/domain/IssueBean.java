@@ -1,21 +1,20 @@
 package de.micromata.jira.rest.core.domain;
 
-import com.google.gson.annotations.Expose;
-
 import java.util.List;
 
-public class IssueBean extends BaseBean {
+import com.google.gson.annotations.Expose;
 
+public class IssueBean extends BaseBean {
     @Expose
-    private FieldsBean fields;
+    private FieldsBean           fields;
     @Expose
-    private String key;
+    private String               key;
     @Expose
-    private RenderedFieldsBean renderedFields;
+    private RenderedFieldsBean   renderedFields;
     @Expose
     private List<TransitionBean> transitions;
     @Expose
-    private Changelog changelog;
+    private ChangelogBean        changelog;
 
     public FieldsBean getFields() {
         return fields;
@@ -49,11 +48,11 @@ public class IssueBean extends BaseBean {
         this.transitions = transitions;
     }
 
-    public Changelog getChangelog() {
+    public ChangelogBean getChangelog() {
         return changelog;
     }
 
-    public void setChangelog(Changelog changelog) {
+    public void setChangelog(ChangelogBean changelog) {
         this.changelog = changelog;
     }
 }

@@ -2,24 +2,11 @@ package de.micromata.jira.rest.core.domain;
 
 import com.google.gson.annotations.Expose;
 
-public class OutwardIssueBean {
-
+public class OutwardIssueBean extends BaseBean {
     @Expose
-    private String id;
-    @Expose
-    private String key;
-    @Expose
-    private String self;
+    private String                 key;
     @Expose
     private OutwardIssueFieldsBean fields;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getKey() {
         return key;
@@ -27,14 +14,6 @@ public class OutwardIssueBean {
 
     public void setKey(String key) {
         this.key = key;
-    }
-
-    public String getSelf() {
-        return self;
-    }
-
-    public void setSelf(String self) {
-        this.self = self;
     }
 
     public OutwardIssueFieldsBean getFields() {

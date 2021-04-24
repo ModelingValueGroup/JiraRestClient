@@ -3,27 +3,26 @@ package de.micromata.jira.rest.core.domain;
 import com.google.gson.annotations.Expose;
 
 public class VersionBean extends BaseBean {
+    @Expose
+    private boolean archived;
+    @Expose
+    private String  description;
+    @Expose
+    private String  releaseDate;
+    @Expose
+    private boolean released;
+    @Expose
+    private String  userStartDate;
+    @Expose
+    private String  userReleaseDate;
+    @Expose
+    private long    projectId;
 
-    @Expose
-    private Boolean archived;
-    @Expose
-    private String description;
-    @Expose
-    private String releaseDate;
-    @Expose
-    private Boolean released;
-    @Expose
-    private String userStartDate;
-    @Expose
-    private String userReleaseDate;
-    @Expose
-    private Integer projectId;
-
-    public Boolean getArchived() {
+    public boolean isArchived() {
         return archived;
     }
 
-    public void setArchived(Boolean archived) {
+    public void setArchived(boolean archived) {
         this.archived = archived;
     }
 
@@ -43,11 +42,11 @@ public class VersionBean extends BaseBean {
         this.releaseDate = releaseDate;
     }
 
-    public Boolean getReleased() {
+    public boolean isReleased() {
         return released;
     }
 
-    public void setReleased(Boolean released) {
+    public void setReleased(boolean released) {
         this.released = released;
     }
 
@@ -67,11 +66,11 @@ public class VersionBean extends BaseBean {
         this.userReleaseDate = userReleaseDate;
     }
 
-    public Integer getProjectId() {
+    public long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(Integer projectId) {
+    public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
 }

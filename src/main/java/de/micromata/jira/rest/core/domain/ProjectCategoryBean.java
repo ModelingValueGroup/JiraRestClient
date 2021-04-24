@@ -2,7 +2,7 @@ package de.micromata.jira.rest.core.domain;
 
 import com.google.gson.annotations.Expose;
 
-public class ResolutionBean extends BaseBean {
+public class ProjectCategoryBean extends BaseBean {
     @Expose
     private String description;
 

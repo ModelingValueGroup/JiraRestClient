@@ -15,10 +15,26 @@
 
 package de.micromata.jira.rest.core.jql;
 
+import static de.micromata.jira.rest.core.jql.EOperator.CHANGED;
+import static de.micromata.jira.rest.core.jql.EOperator.CONTAINS;
+import static de.micromata.jira.rest.core.jql.EOperator.DOES_NOT_CONTAIN;
+import static de.micromata.jira.rest.core.jql.EOperator.EQUALS;
+import static de.micromata.jira.rest.core.jql.EOperator.GREATER_THAN;
+import static de.micromata.jira.rest.core.jql.EOperator.GREATER_THAN_EQUALS;
+import static de.micromata.jira.rest.core.jql.EOperator.IN;
+import static de.micromata.jira.rest.core.jql.EOperator.IS;
+import static de.micromata.jira.rest.core.jql.EOperator.IS_NOT;
+import static de.micromata.jira.rest.core.jql.EOperator.LESS_THAN;
+import static de.micromata.jira.rest.core.jql.EOperator.LESS_THAN_EQUALS;
+import static de.micromata.jira.rest.core.jql.EOperator.NOT_EQUALS;
+import static de.micromata.jira.rest.core.jql.EOperator.NOT_IN;
+import static de.micromata.jira.rest.core.jql.EOperator.WAS;
+import static de.micromata.jira.rest.core.jql.EOperator.WAS_IN;
+import static de.micromata.jira.rest.core.jql.EOperator.WAS_NOT;
+import static de.micromata.jira.rest.core.jql.EOperator.WAS_NOT_IN;
+
 import java.util.Arrays;
 import java.util.List;
-
-import static de.micromata.jira.rest.core.jql.EOperator.*;
 
 /**
  * The type of a field sets the supporting operators.
@@ -117,7 +133,6 @@ public enum EFieldType {
      * The custom type.
      */
     CUSTOM_TYPE;
-
 
 
     /**

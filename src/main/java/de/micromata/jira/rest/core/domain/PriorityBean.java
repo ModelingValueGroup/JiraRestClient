@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 
 
 public class PriorityBean extends BaseBean {
-
     @Expose
     private String iconUrl;
 

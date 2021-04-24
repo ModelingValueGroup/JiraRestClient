@@ -1,5 +1,9 @@
 package de.micromata.jira.rest.client;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import de.micromata.jira.rest.core.domain.AttachmentMetaBean;
 import de.micromata.jira.rest.core.domain.IssuetypeBean;
 import de.micromata.jira.rest.core.domain.PriorityBean;
@@ -8,10 +12,6 @@ import de.micromata.jira.rest.core.domain.field.CreateFieldBean;
 import de.micromata.jira.rest.core.domain.field.FieldBean;
 import de.micromata.jira.rest.core.domain.system.ConfigurationBean;
 import de.micromata.jira.rest.core.util.RestException;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.Future;
 
 /**
  * The SystemClient provides all Information about the Jira System Configuration
@@ -70,7 +70,6 @@ public interface SystemClient {
 
     /**
      * Return a Custom Field by Id
-     *
      */
     Future<FieldBean> getCustomFieldById(String id);
 

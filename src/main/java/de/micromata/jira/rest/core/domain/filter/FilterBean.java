@@ -1,32 +1,31 @@
-
 package de.micromata.jira.rest.core.domain.filter;
+
+import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import de.micromata.jira.rest.core.domain.BaseBean;
 import de.micromata.jira.rest.core.domain.UserBean;
 
-import java.util.List;
-
 public class FilterBean extends BaseBean {
 
     @Expose
-    private String description;
+    private String            description;
     @Expose
-    private UserBean owner;
+    private UserBean          owner;
     @Expose
-    private String jql;
+    private String            jql;
     @Expose
-    private String viewUrl;
+    private String            viewUrl;
     @Expose
-    private String searchUrl;
+    private String            searchUrl;
     @Expose
-    private Boolean favourite;
+    private boolean           favourite;
     @Expose
-    private List<Object> sharePermissions;
+    private List<Object>      sharePermissions;
     @Expose
-    private SharedUsers sharedUsers;
+    private SharedUsersBean   sharedUsers;
     @Expose
-    private Subscriptions subscriptions;
+    private SubscriptionsBean subscriptions;
 
     public String getDescription() {
         return description;
@@ -36,11 +35,11 @@ public class FilterBean extends BaseBean {
         this.description = description;
     }
 
-    public Boolean getFavourite() {
+    public boolean isFavourite() {
         return favourite;
     }
 
-    public void setFavourite(Boolean favourite) {
+    public void setFavourite(boolean favourite) {
         this.favourite = favourite;
     }
 
@@ -68,11 +67,11 @@ public class FilterBean extends BaseBean {
         this.searchUrl = searchUrl;
     }
 
-    public SharedUsers getSharedUsers() {
+    public SharedUsersBean getSharedUsers() {
         return sharedUsers;
     }
 
-    public void setSharedUsers(SharedUsers sharedUsers) {
+    public void setSharedUsers(SharedUsersBean sharedUsers) {
         this.sharedUsers = sharedUsers;
     }
 
@@ -84,11 +83,11 @@ public class FilterBean extends BaseBean {
         this.sharePermissions = sharePermissions;
     }
 
-    public Subscriptions getSubscriptions() {
+    public SubscriptionsBean getSubscriptions() {
         return subscriptions;
     }
 
-    public void setSubscriptions(Subscriptions subscriptions) {
+    public void setSubscriptions(SubscriptionsBean subscriptions) {
         this.subscriptions = subscriptions;
     }
 

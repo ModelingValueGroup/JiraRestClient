@@ -11,7 +11,7 @@ public class MultiValueBean extends CustomFieldBaseBean {
     private List<ValueBean> values;
 
     public List<ValueBean> getValues() {
-        if(values == null){
+        if (values == null) {
             values = new ArrayList<>();
         }
         return values;

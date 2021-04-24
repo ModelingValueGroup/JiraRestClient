@@ -1,11 +1,9 @@
-
 package de.micromata.jira.rest.core.domain.field;
 
 import com.google.gson.annotations.Expose;
 
 
-public class Schema {
-
+public class SchemaBean {
     @Expose
     private String type;
     @Expose
@@ -13,7 +11,7 @@ public class Schema {
     @Expose
     private String custom;
     @Expose
-    private Integer customId;
+    private long   customId;
 
     public String getSystem() {
         return system;
@@ -39,11 +37,11 @@ public class Schema {
         this.custom = custom;
     }
 
-    public Integer getCustomId() {
+    public long getCustomId() {
         return customId;
     }
 
-    public void setCustomId(Integer customId) {
+    public void setCustomId(long customId) {
         this.customId = customId;
     }
 }

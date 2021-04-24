@@ -25,6 +25,6 @@ public interface RestParamConstants {
     String PROJECTKEY = "project";
 
     String FIELDS = "fields";
-    
+
     String PROJECTKEYS = "projectKeys";
 }

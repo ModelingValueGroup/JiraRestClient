@@ -2,36 +2,25 @@ package de.micromata.jira.rest.core.domain;
 
 import com.google.gson.annotations.Expose;
 
-public class VotesBean {
+public class VotesBean extends BaseBean {
+    @Expose
+    private boolean hasVoted;
+    @Expose
+    private long    votes;
 
-    @Expose
-    private Boolean hasVoted;
-    @Expose
-    private String self;
-    @Expose
-    private Integer votes;
-
-    public Boolean getHasVoted() {
+    public boolean isHasVoted() {
         return hasVoted;
     }
 
-    public void setHasVoted(Boolean hasVoted) {
+    public void setHasVoted(boolean hasVoted) {
         this.hasVoted = hasVoted;
     }
 
-    public String getSelf() {
-        return self;
-    }
-
-    public void setSelf(String self) {
-        this.self = self;
-    }
-
-    public Integer getVotes() {
+    public long getVotes() {
         return votes;
     }
 
-    public void setVotes(Integer votes) {
+    public void setVotes(long votes) {
         this.votes = votes;
     }
 }

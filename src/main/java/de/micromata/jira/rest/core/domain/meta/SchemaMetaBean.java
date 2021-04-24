@@ -6,21 +6,16 @@ import com.google.gson.annotations.Expose;
  * Created by cschulc on 16.03.16.
  */
 public class SchemaMetaBean {
-
     @Expose
     private String type;
-
     @Expose
     private String items;
-
     @Expose
     private String system;
-
     @Expose
     private String custom;
-
     @Expose
-    private Integer customId;
+    private long   customId;
 
     public String getType() {
         return type;
@@ -54,11 +49,11 @@ public class SchemaMetaBean {
         this.custom = custom;
     }
 
-    public Integer getCustomId() {
+    public long getCustomId() {
         return customId;
     }
 
-    public void setCustomId(Integer customId) {
+    public void setCustomId(long customId) {
         this.customId = customId;
     }
 }

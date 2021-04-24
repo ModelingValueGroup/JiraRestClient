@@ -2,12 +2,11 @@ package de.micromata.jira.rest.core.domain;
 
 import com.google.gson.annotations.Expose;
 
-public class StatusBean extends BaseBean{
-
+public class StatusBean extends BaseBean {
     @Expose
-    private String description;
+    private String             description;
     @Expose
-    private String iconUrl;
+    private String             iconUrl;
     @Expose
     private StatusCategoryBean statusCategory;
 

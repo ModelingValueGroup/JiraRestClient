@@ -3,15 +3,14 @@ package de.micromata.jira.rest.core.domain;
 import com.google.gson.annotations.Expose;
 
 public class IssuetypeBean extends BaseBean {
-
     @Expose
-    private String description;
+    private String  description;
     @Expose
-    private String iconUrl;
+    private String  iconUrl;
     @Expose
-    private Boolean subtask;
+    private boolean subtask;
     @Expose
-    private Integer avatarId;
+    private long    avatarId;
 
     public String getDescription() {
         return description;
@@ -29,19 +28,19 @@ public class IssuetypeBean extends BaseBean {
         this.iconUrl = iconUrl;
     }
 
-    public Boolean getSubtask() {
+    public boolean isSubtask() {
         return subtask;
     }
 
-    public void setSubtask(Boolean subtask) {
+    public void setSubtask(boolean subtask) {
         this.subtask = subtask;
     }
 
-    public Integer getAvatarId() {
+    public long getAvatarId() {
         return avatarId;
     }
 
-    public void setAvatarId(Integer avatarId) {
+    public void setAvatarId(long avatarId) {
         this.avatarId = avatarId;
     }
 }

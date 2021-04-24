@@ -3,22 +3,17 @@ package de.micromata.jira.rest.core.domain;
 import com.google.gson.annotations.Expose;
 
 
-public class CommentBean {
-
+public class CommentBean extends BaseBean {
     @Expose
     private UserBean author;
     @Expose
-    private String body;
+    private String   body;
     @Expose
-    private String created;
-    @Expose
-    private String id;
-    @Expose
-    private String self;
+    private String   created;
     @Expose
     private UserBean updateAuthor;
     @Expose
-    private String updated;
+    private String   updated;
 
     public UserBean getAuthor() {
         return author;
@@ -42,22 +37,6 @@ public class CommentBean {
 
     public void setCreated(String created) {
         this.created = created;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getSelf() {
-        return self;
-    }
-
-    public void setSelf(String self) {
-        this.self = self;
     }
 
     public UserBean getUpdateAuthor() {

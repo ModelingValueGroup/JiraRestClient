@@ -15,8 +15,6 @@
 
 package de.micromata.jira.rest.core.jql;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * JQL builder
  * <p/>
@@ -27,12 +25,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author Vitali Filippow
  */
 public class JqlBuilder {
-
-    private StringBuffer jql;
-
-    public JqlBuilder() {
-        jql = new StringBuffer();
-    }
+    private final StringBuilder jql = new StringBuilder();
 
     public JqlKeyword addCondition(EField field, EOperator operator, String... operand) {
         JqlKeyword jqlKeyword = new JqlKeyword();
@@ -44,19 +37,29 @@ public class JqlBuilder {
             jql.append(operator).append(" ");
         }
         if (operand != null) {
-            if(operand.length > 1){
-                String join = StringUtils.join(operand, ",");
-                jql.append("(").append(join).append(") ");
-            }else {
-                jql.append(operand[0]).append(" ");
+            boolean isMulti = operand.length > 1;
+            if (isMulti) {
+                jql.append("(");
             }
+            String del = "";
+            for (String s : operand) {
+                jql.append(del);
+                del = ",";
+                boolean hasSpaces = s.contains(" ");
+                if (hasSpaces) {
+                    jql.append("\"");
+                }
+                jql.append(s);
+                if (hasSpaces) {
+                    jql.append("\"");
+                }
+            }
+            if (isMulti) {
+                jql.append(")");
+            }
+            jql.append(" ");
         }
-
         return jqlKeyword;
-    }
-
-    public JqlBuilder getJqlBuilder() {
-        return this;
     }
 
     public void clear() {
@@ -67,29 +70,26 @@ public class JqlBuilder {
 
         public JqlBuilder and() {
             jql.append(EKeyword.AND).append(" ");
-            return getJqlBuilder();
+            return JqlBuilder.this;
         }
 
         public JqlBuilder or() {
             jql.append(EKeyword.OR).append(" ");
-            return getJqlBuilder();
+            return JqlBuilder.this;
         }
 
         public String orderBy(SortOrder order, EField... fields) {
-            if (fields == null || order == null || fields.length == 0) {
-                return build();
+            if (fields != null && order != null && fields.length != 0) {
+                jql.append(EKeyword.ORDER_BY).append(" ");
+                jql.append(fields[0]);
+
+                for (int i = 1; i < fields.length; i++) {
+                    jql.append(", ");
+                    jql.append(fields[i]);
+                }
+
+                jql.append(" ").append(order);
             }
-
-            jql.append(EKeyword.ORDER_BY).append(" ");
-            jql.append(fields[0]);
-
-            for (int i = 1; i < fields.length; i++) {
-                jql.append(", ");
-                jql.append(fields[i]);
-            }
-
-            jql.append(" ").append(order);
-
             return build();
         }
 

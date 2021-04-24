@@ -1,16 +1,16 @@
 package de.micromata.jira.rest.core.domain;
 
-import com.google.gson.annotations.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
 
 public class ErrorBean {
 
     @Expose
     private List<String> errorMessages = new ArrayList<>();
     @Expose
-    private ErrorsBean errors;
+    private ErrorsBean   errors;
 
     public ErrorsBean getErrors() {
         return errors;

@@ -6,32 +6,28 @@ import com.google.gson.annotations.Expose;
  * Created by cschulc on 11.09.2016.
  */
 public class TimeTrackingConfigurationBean {
-
     @Expose
-    private Integer  workingHoursPerDay;
-
+    private long   workingHoursPerDay;
     @Expose
-    private Integer workingDaysPerWeek;
-
+    private long   workingDaysPerWeek;
     @Expose
     private String timeFormat;
-
     @Expose
     private String defaultUnit;
 
-    public Integer getWorkingHoursPerDay() {
+    public long getWorkingHoursPerDay() {
         return workingHoursPerDay;
     }
 
-    public void setWorkingHoursPerDay(Integer workingHoursPerDay) {
+    public void setWorkingHoursPerDay(long workingHoursPerDay) {
         this.workingHoursPerDay = workingHoursPerDay;
     }
 
-    public Integer getWorkingDaysPerWeek() {
+    public long getWorkingDaysPerWeek() {
         return workingDaysPerWeek;
     }
 
-    public void setWorkingDaysPerWeek(Integer workingDaysPerWeek) {
+    public void setWorkingDaysPerWeek(long workingDaysPerWeek) {
         this.workingDaysPerWeek = workingDaysPerWeek;
     }
 

@@ -166,15 +166,15 @@ public interface JsonConstants {
     String PROP_REQUIRED = "required";
 
     String PROP_FROM = "from";
-    
+
     String PROP_FROM_STRING = "fromString";
-    
+
     String PROP_TO_STRING = "toString";
-    
+
     String PROP_FIELDTYPE = "fieldtype";
 
     String PROP_FIELD = "field";
-    
+
     // Properties und Elemente der JQL-Suche
 
     String PROP_EXPAND = "expand";
@@ -254,7 +254,7 @@ public interface JsonConstants {
     String ELEM_CHANGELOG = "changelog";
 
     String ELEM_ITEMS = "items";
-    
+
     String ELEM_HISTORIES = "histories";
 
     String ELEM_RENDERED_FIELDS = "renderedFields";
@@ -268,7 +268,7 @@ public interface JsonConstants {
     String ROLE_DEVELOPERS = "Developers";
 
     //Issue Type für die JQL Suche
-    
+
     String ISSUETYPE_IMPROVEMENT = "Improvement";
 
     String ISSUETYPE_BUG = "Bug";
@@ -278,16 +278,16 @@ public interface JsonConstants {
     String ISSUETYPE_SUBTASK = "Sub-Task";
 
     String ISSUETYPE_TASK = "Task";
-    
+
     //Priority für die JQL Suche
-    
+
     String PRIORITY_MAJOR = "Major";
-    
+
     String PRIORITY_BLOCKER = "Blocker";
-    
+
     String PRIORITY_CRITICAL = "Critical";
-    
+
     String PRIORITY_MINOR = "Minor";
-    
+
     String PRIORITY_TRIVIAL = "Trivial";
 }

@@ -1,10 +1,10 @@
 package de.micromata.jira.rest.core.domain.meta;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.BaseBean;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
+import de.micromata.jira.rest.core.domain.BaseBean;
 
 /**
  * Created by cschulc on 16.03.16.

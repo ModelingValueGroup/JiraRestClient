@@ -25,7 +25,7 @@ public enum SortOrder {
 
     private final String order;
 
-   SortOrder(String order) {
+    SortOrder(String order) {
         this.order = order;
     }
 

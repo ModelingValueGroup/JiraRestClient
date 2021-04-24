@@ -1,88 +1,87 @@
 package de.micromata.jira.rest.core.domain;
 
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import de.micromata.jira.rest.core.domain.customFields.CustomFieldBaseBean;
 
-import java.util.List;
-
 public class FieldsBean {
-
     @Expose
     private AggregateprogressBean aggregateprogress;
     @Expose
-    private Integer aggregatetimeestimate;
+    private long                  aggregatetimeestimate;
     @Expose
-    private Integer aggregatetimeoriginalestimate;
+    private long                  aggregatetimeoriginalestimate;
     @Expose
-    private Integer aggregatetimespent;
+    private long                  aggregatetimespent;
     @Expose
-    private UserBean assignee;
+    private UserBean              assignee;
     @Expose
-    private List<AttachmentBean> attachment;
+    private List<AttachmentBean>  attachment;
     @Expose
-    private CommentsBean comment;
+    private CommentsBean          comment;
     @Expose
-    private List<ComponentBean> components;
+    private List<ComponentBean>   components;
     @Expose
-    private String created;
+    private String                created;
     @Expose
-    private UserBean creator;
+    private UserBean              creator;
     @Expose
-    private String description;
+    private String                description;
     @Expose
-    private String duedate;
+    private String                duedate;
     @Expose
-    private String environment;
+    private String                environment;
     @Expose
-    private List<VersionBean> fixVersions;
+    private List<VersionBean>     fixVersions;
     @Expose
-    private List<IssuelinkBean> issuelinks;
+    private List<IssuelinkBean>   issuelinks;
     @Expose
-    private IssuetypeBean issuetype;
+    private IssuetypeBean         issuetype;
     @Expose
-    private IssueBean parent;
+    private IssueBean             parent;
     @Expose
-    private List<String> labels;
+    private List<String>          labels;
     @Expose
-    private String lastViewed;
+    private String                lastViewed;
     @Expose
-    private PriorityBean priority;
+    private PriorityBean          priority;
     @Expose
-    private ProgressBean progress;
+    private ProgressBean          progress;
     @Expose
-    private ProjectBean project;
+    private ProjectBean           project;
     @Expose
-    private UserBean reporter;
+    private UserBean              reporter;
     @Expose
-    private ResolutionBean resolution;
+    private ResolutionBean        resolution;
     @Expose
-    private String resolutiondate;
+    private String                resolutiondate;
     @Expose
-    private StatusBean status;
+    private StatusBean            status;
     @Expose
-    private List<IssueBean> subtasks;
+    private List<IssueBean>       subtasks;
     @Expose
-    private String summary;
+    private String                summary;
     @Expose
-    private Integer timeestimate;
+    private long                  timeestimate;
     @Expose
-    private Integer timeoriginalestimate;
+    private long                  timeoriginalestimate;
     @Expose
-    private Integer timespent;
+    private long                  timespent;
     @Expose
-    private TimetrackingBean timetracking;
+    private TimetrackingBean      timetracking;
     @Expose
-    private String updated;
+    private String                updated;
     @Expose
-    private List<VersionBean> versions;
+    private List<VersionBean>     versions;
     @Expose
-    private VotesBean votes;
+    private VotesBean             votes;
     @Expose
-    private WatchesBean watches;
+    private WatchesBean           watches;
     @Expose
-    private WorklogBean worklog;
+    private WorklogBean           worklog;
     @Expose
-    private Integer workratio;
+    private long                  workratio;
 
     private List<CustomFieldBaseBean> customFields;
 
@@ -94,27 +93,27 @@ public class FieldsBean {
         this.aggregateprogress = aggregateprogress;
     }
 
-    public Integer getAggregatetimeestimate() {
+    public long getAggregatetimeestimate() {
         return aggregatetimeestimate;
     }
 
-    public void setAggregatetimeestimate(Integer aggregatetimeestimate) {
+    public void setAggregatetimeestimate(long aggregatetimeestimate) {
         this.aggregatetimeestimate = aggregatetimeestimate;
     }
 
-    public Integer getAggregatetimeoriginalestimate() {
+    public long getAggregatetimeoriginalestimate() {
         return aggregatetimeoriginalestimate;
     }
 
-    public void setAggregatetimeoriginalestimate(Integer aggregatetimeoriginalestimate) {
+    public void setAggregatetimeoriginalestimate(long aggregatetimeoriginalestimate) {
         this.aggregatetimeoriginalestimate = aggregatetimeoriginalestimate;
     }
 
-    public Integer getAggregatetimespent() {
+    public long getAggregatetimespent() {
         return aggregatetimespent;
     }
 
-    public void setAggregatetimespent(Integer aggregatetimespent) {
+    public void setAggregatetimespent(long aggregatetimespent) {
         this.aggregatetimespent = aggregatetimespent;
     }
 
@@ -310,27 +309,27 @@ public class FieldsBean {
         this.summary = summary;
     }
 
-    public Integer getTimeestimate() {
+    public long getTimeestimate() {
         return timeestimate;
     }
 
-    public void setTimeestimate(Integer timeestimate) {
+    public void setTimeestimate(long timeestimate) {
         this.timeestimate = timeestimate;
     }
 
-    public Integer getTimeoriginalestimate() {
+    public long getTimeoriginalestimate() {
         return timeoriginalestimate;
     }
 
-    public void setTimeoriginalestimate(Integer timeoriginalestimate) {
+    public void setTimeoriginalestimate(long timeoriginalestimate) {
         this.timeoriginalestimate = timeoriginalestimate;
     }
 
-    public Integer getTimespent() {
+    public long getTimespent() {
         return timespent;
     }
 
-    public void setTimespent(Integer timespent) {
+    public void setTimespent(long timespent) {
         this.timespent = timespent;
     }
 
@@ -382,11 +381,11 @@ public class FieldsBean {
         this.worklog = worklog;
     }
 
-    public Integer getWorkratio() {
+    public long getWorkratio() {
         return workratio;
     }
 
-    public void setWorkratio(Integer workratio) {
+    public void setWorkratio(long workratio) {
         this.workratio = workratio;
     }
 

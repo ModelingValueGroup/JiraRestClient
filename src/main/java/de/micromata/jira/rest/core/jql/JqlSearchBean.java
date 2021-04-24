@@ -15,12 +15,10 @@
 
 package de.micromata.jira.rest.core.jql;
 
-import com.google.gson.annotations.Expose;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * JQL search requirements.
@@ -29,52 +27,56 @@ import java.util.List;
  * @author Vitali Filippow
  */
 public class JqlSearchBean {
-
     /**
      * Result list start at.
      */
     @Expose
-    private Integer startAt = null;
-
+    private Integer      startAt;
+    //
     /**
      * Maximum result list size.
      */
     @Expose
-    private Integer maxResults = null;
-
+    private Integer      maxResults;
+    //
     /**
      * Result fields for a query.
      */
     @Expose
-    private List<String> fields = null;
-
+    private List<String> fields;
     @Expose
-    private String jql = StringUtils.EMPTY;
-
+    private String       jql;
     @Expose
     private List<String> expand = new ArrayList<>();
+
+    public JqlSearchBean(String jql) {
+        this.jql = jql;
+    }
 
     /**
      * Adds fields which should be returned after the request.
      *
      * @param fields = returned fields
      */
-    public void addField(EField... fields) {
+    public JqlSearchBean addField(EField... fields) {
         for (EField f : fields) {
-            getFields().add(f.toString());
+            getFields().add(""+f);
         }
+        return this;
     }
 
-    public void addField(Collection<String> fields){
-        for (String field : fields) {
-            getFields().add(field);
+    public JqlSearchBean addNotField(EField... fields) {
+        for (EField f : fields) {
+            getFields().add("-"+f);
         }
+        return this;
     }
 
-    public void addExpand(EField... fields){
+    public JqlSearchBean addExpand(EField... fields) {
         for (EField field : fields) {
             getExpand().add(field.toString());
         }
+        return this;
     }
 
     /**
@@ -129,12 +131,13 @@ public class JqlSearchBean {
         return jql;
     }
 
-    public void setJql(String jql) {
+    public JqlSearchBean setJql(String jql) {
         this.jql = jql;
+        return this;
     }
 
     public List<String> getExpand() {
-        if(expand == null){
+        if (expand == null) {
             expand = new ArrayList<>();
         }
         return expand;

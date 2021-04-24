@@ -1,9 +1,5 @@
 package de.micromata.jira.rest.client;
 
-import de.micromata.jira.rest.core.domain.*;
-import de.micromata.jira.rest.core.domain.update.IssueUpdate;
-import de.micromata.jira.rest.core.util.RestException;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,6 +7,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.concurrent.Future;
+
+import de.micromata.jira.rest.core.domain.AttachmentBean;
+import de.micromata.jira.rest.core.domain.CommentBean;
+import de.micromata.jira.rest.core.domain.CommentsBean;
+import de.micromata.jira.rest.core.domain.IssueBean;
+import de.micromata.jira.rest.core.domain.IssueResponse;
+import de.micromata.jira.rest.core.domain.TransitionBean;
+import de.micromata.jira.rest.core.domain.WorklogBean;
+import de.micromata.jira.rest.core.domain.update.IssueUpdate;
+import de.micromata.jira.rest.core.util.RestException;
 
 /**
  * The IssueClient provides all Informations for Jira Issues
@@ -36,8 +42,6 @@ public interface IssueClient {
 
     /**
      * update Field of an Issue
-     *
-     *
      */
     Future<IssueBean> updateIssue(String issueKey, IssueUpdate issueUpdate);
 
@@ -45,8 +49,8 @@ public interface IssueClient {
      * Return a Issue with the given Field and Expand Fields.
      *
      * @param issueKey The IssueKey
-     * @param fields The field you want to return.
-     * @param expand The Field which must expand.
+     * @param fields   The field you want to return.
+     * @param expand   The Field which must expand.
      * @return IssueBean or null if the issue did not exist
      */
     Future<IssueBean> getIssueByKey(String issueKey, List<String> fields, List<String> expand);
@@ -94,7 +98,7 @@ public interface IssueClient {
      * @throws RestException
      */
     boolean transferWorklogInIssue(String issueKey,
-                                          WorklogBean worklog) throws RestException, IOException, URISyntaxException;
+                                   WorklogBean worklog) throws RestException, IOException, URISyntaxException;
 
     /**
      * Returns true if the transition update on an Issue success.
@@ -124,11 +128,15 @@ public interface IssueClient {
      */
     Future<CommentsBean> getCommentsByIssue(String issueKey);
 
+    Future<WorklogBean> getWorklogByIssue(String issueKey);
+
+    Future<WorklogBean> getWorklogByIssue(String issueKey, List<String> fields, List<String> expand);
+
     /**
      * Add comment to issue.
      *
      * @param issueKey = issue key
-     * @param comment = comment to add
+     * @param comment  = comment to add
      */
     boolean addCommentToIssue(String issueKey, CommentBean comment) throws RestException, URISyntaxException, IOException;
 }

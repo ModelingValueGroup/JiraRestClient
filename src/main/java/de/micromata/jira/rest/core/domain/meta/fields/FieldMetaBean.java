@@ -1,10 +1,10 @@
 package de.micromata.jira.rest.core.domain.meta.fields;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.meta.SchemaMetaBean;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
+import de.micromata.jira.rest.core.domain.meta.SchemaMetaBean;
 
 /**
  * Created by cschulc on 16.03.16.
@@ -12,15 +12,15 @@ import java.util.List;
 public class FieldMetaBean {
 
     @Expose
-    private Boolean required;
+    private boolean        required;
     @Expose
     private SchemaMetaBean schema;
     @Expose
-    private String name;
+    private String         name;
     @Expose
-    private Boolean hasDefaultValue;
+    private boolean        hasDefaultValue;
     @Expose
-    private List<String> operations = new ArrayList<>();
+    private List<String>   operations = new ArrayList<>();
 
     public FieldMetaBean() {
     }
@@ -28,16 +28,16 @@ public class FieldMetaBean {
     public FieldMetaBean(FieldMetaBean fieldMetaBean) {
         this.schema = fieldMetaBean.getSchema();
         this.setName(fieldMetaBean.getName());
-        this.setHasDefaultValue(fieldMetaBean.getHasDefaultValue());
+        this.setHasDefaultValue(fieldMetaBean.isHasDefaultValue());
         this.setOperations(fieldMetaBean.getOperations());
-        this.setRequired(fieldMetaBean.getRequired());
+        this.setRequired(fieldMetaBean.isRequired());
     }
 
-    public Boolean getRequired() {
+    public boolean isRequired() {
         return required;
     }
 
-    public void setRequired(Boolean required) {
+    public void setRequired(boolean required) {
         this.required = required;
     }
 
@@ -57,11 +57,11 @@ public class FieldMetaBean {
         this.name = name;
     }
 
-    public Boolean getHasDefaultValue() {
+    public boolean isHasDefaultValue() {
         return hasDefaultValue;
     }
 
-    public void setHasDefaultValue(Boolean hasDefaultValue) {
+    public void setHasDefaultValue(boolean hasDefaultValue) {
         this.hasDefaultValue = hasDefaultValue;
     }
 

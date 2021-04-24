@@ -91,7 +91,7 @@ public enum EField {
      */
     CREATED("created", EFieldType.DATE),
 
-//	CUSTOM_FIELD("CustomFieldName", EFieldType.CUSTOM_TYPE),
+    //	CUSTOM_FIELD("CustomFieldName", EFieldType.CUSTOM_TYPE),
 
     /**
      * Issues where the Description contains particular text.
@@ -380,17 +380,22 @@ public enum EField {
      */
     WORK_RATIO("workRatio", EFieldType.NUMBER),
 
-    /** <i>Avaiable Transitions for the Issue</i>
-     *  <p>an Issue has several Transition to which the status can change.</p>
+    WORK_LOG("worklog", EFieldType.CUSTOM_TYPE),
+
+    /**
+     * <i>Avaiable Transitions for the Issue</i>
+     * <p>an Issue has several Transition to which the status can change.</p>
      */
     TRANSITIONS("transitions", EFieldType.CUSTOM_TYPE),
-    
-    
-    /** <i>Avaiable changelog for an Issue</i>
+
+
+    /**
+     * <i>Avaiable changelog for an Issue</i>
      */
     CHANGELOG("changelog", EFieldType.CUSTOM_TYPE),
 
-    /** <i>Renders the Description Markup to HTML</i>
+    /**
+     * <i>Renders the Description Markup to HTML</i>
      */
     RENDEREDFIELDS("renderedFields", EFieldType.CUSTOM_TYPE),
 

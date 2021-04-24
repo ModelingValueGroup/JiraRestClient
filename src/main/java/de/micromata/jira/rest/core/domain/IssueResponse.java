@@ -2,10 +2,10 @@ package de.micromata.jira.rest.core.domain;
 
 import com.google.gson.annotations.Expose;
 
-public class IssueResponse  {
+public class IssueResponse {
 
     @Expose
-    private String key;
+    private String    key;
     @Expose
     private ErrorBean error = null;
 

@@ -3,7 +3,7 @@ package de.micromata.jira.rest.core.domain.field;
 import com.google.gson.annotations.Expose;
 import de.micromata.jira.rest.core.domain.BaseBean;
 
-public class CreateFieldBean extends BaseBean{
+public class CreateFieldBean extends BaseBean {
     @Expose
     private String description;
     @Expose

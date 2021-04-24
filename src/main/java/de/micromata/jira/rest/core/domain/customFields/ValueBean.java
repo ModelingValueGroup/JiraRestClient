@@ -8,7 +8,7 @@ import de.micromata.jira.rest.core.domain.BaseBean;
  */
 public class ValueBean extends BaseBean {
     @Expose
-    private String value;
+    private String    value;
     @Expose
     private ValueBean child;
 

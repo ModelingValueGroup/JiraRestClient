@@ -1,13 +1,14 @@
 package de.micromata.jira.rest.core.domain.permission;
 
-import de.micromata.jira.rest.core.domain.BaseBean;
 import org.apache.commons.lang3.StringUtils;
+
+import de.micromata.jira.rest.core.domain.BaseBean;
 
 /**
  * User: Christian Schulze (c.schulze@micromata.de)
  * Date: 09.04.16
  */
-public class PermissionBean extends BaseBean{
+public class PermissionBean extends BaseBean {
 
     private String key = StringUtils.EMPTY;
 

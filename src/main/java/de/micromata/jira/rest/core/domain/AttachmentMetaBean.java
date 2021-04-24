@@ -7,7 +7,7 @@ public class AttachmentMetaBean {
     @Expose
     private boolean enabled;
     @Expose
-    private int uploadLimit;
+    private int     uploadLimit;
 
     public boolean isEnabled() {
         return enabled;

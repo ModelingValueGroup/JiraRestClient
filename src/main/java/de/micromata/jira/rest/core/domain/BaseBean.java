@@ -1,5 +1,9 @@
 package de.micromata.jira.rest.core.domain;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
@@ -9,7 +13,6 @@ import com.google.gson.annotations.Expose;
  * Date: 12.12.2014.
  */
 public class BaseBean implements Comparable<BaseBean> {
-
     @Expose
     private String expand;
     @Expose
@@ -60,5 +63,16 @@ public class BaseBean implements Comparable<BaseBean> {
     public String toString() {
         Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
         return gson.toJson(this);
+    }
+
+    private static final DateTimeFormatter JIRA_DATE_TIME_FORMAT = new DateTimeFormatterBuilder().parseCaseInsensitive()
+            .append(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+            .parseLenient()
+            .appendOffset("+HHmm", "")
+            .parseStrict()
+            .toFormatter();
+
+    protected static LocalDateTime toDate(String s) {
+        return LocalDateTime.parse(s, JIRA_DATE_TIME_FORMAT);
     }
 }

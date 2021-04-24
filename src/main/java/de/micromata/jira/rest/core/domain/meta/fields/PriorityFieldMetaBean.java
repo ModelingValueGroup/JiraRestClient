@@ -1,10 +1,10 @@
 package de.micromata.jira.rest.core.domain.meta.fields;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.PriorityBean;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
+import de.micromata.jira.rest.core.domain.PriorityBean;
 
 /**
  * Created by cschulc on 16.03.16.

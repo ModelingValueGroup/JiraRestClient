@@ -9,9 +9,9 @@ import com.google.gson.annotations.Expose;
 public class TransitionBean {
 
     @Expose
-    private String id;
+    private String     id;
     @Expose
-    private String name;
+    private String     name;
     @Expose
     private StatusBean to;
 

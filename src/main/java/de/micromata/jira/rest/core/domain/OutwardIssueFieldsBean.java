@@ -5,11 +5,11 @@ import com.google.gson.annotations.Expose;
 public class OutwardIssueFieldsBean {
 
     @Expose
-    private String summary;
+    private String        summary;
     @Expose
-    private StatusBean status;
+    private StatusBean    status;
     @Expose
-    private PriorityBean priority;
+    private PriorityBean  priority;
     @Expose
     private IssuetypeBean issuetype;
 

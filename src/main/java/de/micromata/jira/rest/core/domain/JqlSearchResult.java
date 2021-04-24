@@ -15,26 +15,26 @@
 
 package de.micromata.jira.rest.core.domain;
 
-import com.google.gson.annotations.Expose;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * @author Christian Schulze
  * @author Vitali Filippow
  */
 public class JqlSearchResult {
-
     @Expose
-    private String expand = StringUtils.EMPTY;
+    private String          expand = StringUtils.EMPTY;
     @Expose
-    private int startAt = 0;
+    private int             startAt;
     @Expose
-    private int maxResults = 0;
+    private int             maxResults;
     @Expose
-    private int total = 0;
+    private int             total;
     @Expose
     private List<IssueBean> issues;
 

@@ -1,44 +1,44 @@
 package de.micromata.jira.rest.core.domain;
 
-import com.google.gson.annotations.Expose;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
 
 public class RenderedFieldsBean {
 
     @Expose
-    private String aggregatetimeestimate;
+    private String               aggregatetimeestimate;
     @Expose
-    private String aggregatetimeoriginalestimate;
+    private String               aggregatetimeoriginalestimate;
     @Expose
-    private TimetrackingBean timetracking;
+    private TimetrackingBean     timetracking;
     @Expose
-    private String environment;
+    private String               environment;
     @Expose
-    private String created;
+    private String               created;
     @Expose
-    private String updated;
+    private String               updated;
     @Expose
-    private String description;
+    private String               description;
     @Expose
-    private String timeestimate;
+    private String               timeestimate;
     @Expose
-    private String duedate;
+    private String               duedate;
     @Expose
-    private String lastViewed;
+    private String               lastViewed;
     @Expose
     private List<AttachmentBean> attachment = new ArrayList<>();
     @Expose
-    private CommentsBean comment;
+    private CommentsBean         comment;
     @Expose
-    private String timeoriginalestimate;
+    private String               timeoriginalestimate;
     @Expose
-    private Object timespent;
+    private Object               timespent;
     @Expose
-    private WorklogBean worklog;
+    private WorklogBean          worklog;
     @Expose
-    private Object aggregatetimespent;
+    private Object               aggregatetimespent;
 
     public String getAggregatetimeestimate() {
         return aggregatetimeestimate;

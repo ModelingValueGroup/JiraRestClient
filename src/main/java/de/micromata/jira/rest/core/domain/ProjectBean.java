@@ -1,24 +1,25 @@
 package de.micromata.jira.rest.core.domain;
 
+import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import de.micromata.jira.rest.core.domain.system.AssigneeTypeEnum;
 
-import java.util.List;
-
 public class ProjectBean extends BaseBean {
-
     @Expose
-    private AvatarUrlsBean avatarUrls;
+    private AvatarUrlsBean      avatarUrls;
     @Expose
-    private String key;
+    private String              key;
     @Expose
     private List<ComponentBean> components;
     @Expose
-    private List<VersionBean> versions;
+    private List<VersionBean>   versions;
     @Expose
     private List<IssuetypeBean> issueTypes;
     @Expose
-    private AssigneeTypeEnum assigneeType;
+    private AssigneeTypeEnum    assigneeType;
+    @Expose
+    private ProjectCategoryBean projectCategory;
 
     public AvatarUrlsBean getAvatarUrls() {
         return avatarUrls;
@@ -66,5 +67,13 @@ public class ProjectBean extends BaseBean {
 
     public void setAssigneeType(AssigneeTypeEnum assigneeType) {
         this.assigneeType = assigneeType;
+    }
+
+    public ProjectCategoryBean getProjectCategory() {
+        return projectCategory;
+    }
+
+    public void setProjectCategory(ProjectCategoryBean projectCategory) {
+        this.projectCategory = projectCategory;
     }
 }

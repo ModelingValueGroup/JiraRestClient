@@ -1,6 +1,12 @@
 package de.micromata.jira.rest.core;
 
-import com.google.gson.reflect.TypeToken;
+import java.net.HttpURLConnection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+
 import com.google.gson.stream.JsonReader;
 import de.micromata.jira.rest.JiraRestClient;
 import de.micromata.jira.rest.client.SystemClient;
@@ -13,20 +19,7 @@ import de.micromata.jira.rest.core.domain.field.FieldBean;
 import de.micromata.jira.rest.core.domain.system.ConfigurationBean;
 import de.micromata.jira.rest.core.misc.RestParamConstants;
 import de.micromata.jira.rest.core.misc.RestPathConstants;
-import de.micromata.jira.rest.core.util.HttpMethodFactory;
 import de.micromata.jira.rest.core.util.RestException;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 /**
  * User: Christian Schulze
@@ -35,139 +28,94 @@ import java.util.concurrent.Future;
  */
 public class SystemClientImpl extends BaseClient implements SystemClient, RestParamConstants, RestPathConstants {
 
-
-    public SystemClientImpl(JiraRestClient jiraRestClient, ExecutorService executorService) {
+    public SystemClientImpl(JiraRestClient jiraRestClient) {
         super(jiraRestClient);
-        this.executorService = executorService;
     }
-
 
     @Override
     public Future<ConfigurationBean> getConfiguration() {
-        return executorService.submit(() -> {
-
-            URIBuilder uriBuilder = buildPath(CONFIGURATION);
-            HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
-            CloseableHttpResponse response = client.execute(method, clientContext);
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpURLConnection.HTTP_OK) {
-                JsonReader jsonReader = getJsonReader(response);
-                ConfigurationBean configuration = gson.fromJson(jsonReader, ConfigurationBean.class);
-                method.releaseConnection();
-                return configuration;
-            } else {
-                RestException restException = new RestException(response);
-                method.releaseConnection();
-                response.close();
-                throw restException;
+        return submit(() -> {
+            try (CloseableHttpResponse response = executeGet(CONFIGURATION)) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpURLConnection.HTTP_OK) {
+                    try (JsonReader jsonReader = getJsonReader(response)) {
+                        return gson.fromJson(jsonReader, ConfigurationBean.class);
+                    }
+                } else {
+                    throw new RestException(response);
+                }
             }
         });
     }
 
     public Future<List<IssuetypeBean>> getIssueTypes() {
-        return executorService.submit(() -> {
-
-            URIBuilder uriBuilder = buildPath(ISSUETPYES);
-            HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
-            CloseableHttpResponse response = client.execute(method, clientContext);
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpURLConnection.HTTP_OK) {
-                JsonReader jsonReader = getJsonReader(response);
-                Type listType = new TypeToken<ArrayList<IssuetypeBean>>() {
-                }.getType();
-                List<IssuetypeBean> issuetypes = gson.fromJson(jsonReader, listType);
-                method.releaseConnection();
-                return issuetypes;
-            } else {
-                RestException restException = new RestException(response);
-                method.releaseConnection();
-                response.close();
-                throw restException;
+        return submit(() -> {
+            try (CloseableHttpResponse response = executeGet(ISSUETPYES)) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpURLConnection.HTTP_OK) {
+                    try (JsonReader jsonReader = getJsonReader(response)) {
+                        return gson.fromJson(jsonReader, LIST_OF_ISSUETYPES);
+                    }
+                } else {
+                    throw new RestException(response);
+                }
             }
         });
 
     }
-
 
     public Future<List<StatusBean>> getStates() {
-        return executorService.submit(() -> {
-
-            URIBuilder uriBuilder = buildPath(STATUS);
-            HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
-            CloseableHttpResponse response = client.execute(method, clientContext);
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpURLConnection.HTTP_OK) {
-                JsonReader jsonReader = getJsonReader(response);
-                Type listType = new TypeToken<ArrayList<StatusBean>>() {
-                }.getType();
-                List<StatusBean> states = gson.fromJson(jsonReader, listType);
-                method.releaseConnection();
-                return states;
-            } else {
-                RestException restException = new RestException(response);
-                method.releaseConnection();
-                response.close();
-                throw restException;
+        return submit(() -> {
+            try (CloseableHttpResponse response = executeGet(STATUS)) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpURLConnection.HTTP_OK) {
+                    try (JsonReader jsonReader = getJsonReader(response)) {
+                        return gson.fromJson(jsonReader, LIST_OF_STATUS);
+                    }
+                } else {
+                    throw new RestException(response);
+                }
             }
         });
-
     }
-
 
     public Future<List<PriorityBean>> getPriorities() {
-        return executorService.submit(() -> {
-
-            URIBuilder uriBuilder = buildPath(PRIORITY);
-            HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
-            CloseableHttpResponse response = client.execute(method, clientContext);
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpURLConnection.HTTP_OK) {
-                JsonReader jsonReader = getJsonReader(response);
-                Type listType = new TypeToken<ArrayList<PriorityBean>>() {
-                }.getType();
-                List<PriorityBean> priorities = gson.fromJson(jsonReader, listType);
-                method.releaseConnection();
-                return priorities;
-            } else {
-                RestException restException = new RestException(response);
-                method.releaseConnection();
-                response.close();
-                throw restException;
+        return submit(() -> {
+            try (CloseableHttpResponse response = executeGet(PRIORITY)) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpURLConnection.HTTP_OK) {
+                    try (JsonReader jsonReader = getJsonReader(response)) {
+                        return gson.fromJson(jsonReader, LIST_OF_PRIORITY);
+                    }
+                } else {
+                    throw new RestException(response);
+                }
             }
         });
     }
-
 
     public Future<List<FieldBean>> getAllFields() {
-        return executorService.submit(() -> {
-            URIBuilder uriBuilder = buildPath(FIELD);
-            HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
-            CloseableHttpResponse response = client.execute(method, clientContext);
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpURLConnection.HTTP_OK) {
-                JsonReader jsonReader = getJsonReader(response);
-                Type listType = new TypeToken<ArrayList<FieldBean>>() {
-                }.getType();
-                List<FieldBean> fields = gson.fromJson(jsonReader, listType);
-                method.releaseConnection();
-                return fields;
-            } else {
-                RestException restException = new RestException(response);
-                method.releaseConnection();
-                response.close();
-                throw restException;
+        return submit(() -> {
+            try (CloseableHttpResponse response = executeGet(FIELD)) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpURLConnection.HTTP_OK) {
+                    try (JsonReader jsonReader = getJsonReader(response)) {
+                        return gson.fromJson(jsonReader, LIST_OF_FIELD);
+                    }
+                } else {
+                    throw new RestException(response);
+                }
             }
         });
     }
 
-
     public Future<List<FieldBean>> getAllCustomFields() {
-        return executorService.submit(() -> {
-            List<FieldBean> retval = new ArrayList<>();
+        return submit(() -> {
+            List<FieldBean>         retval    = new ArrayList<>();
             Future<List<FieldBean>> allFields = getAllFields();
-            List<FieldBean> fieldBeen = allFields.get();
+            List<FieldBean>         fieldBeen = allFields.get();
             for (FieldBean fieldBean : fieldBeen) {
-                if (fieldBean.getCustom() == true) {
+                if (fieldBean.isCustom()) {
                     retval.add(fieldBean);
                 }
             }
@@ -175,16 +123,15 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-
     public Future<FieldBean> getCustomFieldById(final String id) {
-        return executorService.submit(() -> {
+        return submit(() -> {
             Future<List<FieldBean>> allFields = getAllFields();
-            List<FieldBean> fieldBeen = allFields.get();
+            List<FieldBean>         fieldBeen = allFields.get();
             for (FieldBean fieldBean : fieldBeen) {
-                if (fieldBean.getCustom() == false) {
+                if (!fieldBean.isCustom()) {
                     continue;
                 }
-                if (fieldBean.getId().contains(id) == true) {
+                if (fieldBean.getId().contains(id)) {
                     return fieldBean;
                 }
             }
@@ -192,29 +139,22 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-
     public Future<AttachmentMetaBean> getAttachmentMeta() {
         return null;
     }
 
     @Override
     public Future<FieldBean> createCustomField(CreateFieldBean customField) {
-        return executorService.submit(() -> {
-            URIBuilder uriBuilder = buildPath(FIELD);
-            HttpPost method = HttpMethodFactory.createPostMethod(uriBuilder.build(), customField.toString());
-            CloseableHttpResponse response = client.execute(method, clientContext);
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode == HttpURLConnection.HTTP_CREATED) {
-                JsonReader jsonReader = getJsonReader(response);
-                FieldBean fieldBean = gson.fromJson(jsonReader, FieldBean.class);
-                method.releaseConnection();
-                response.close();
-                return fieldBean;
-            } else {
-                RestException restException = new RestException(response);
-                method.releaseConnection();
-                response.close();
-                throw restException;
+        return submit(() -> {
+            try (CloseableHttpResponse response = executePost(customField, FIELD)) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpURLConnection.HTTP_CREATED) {
+                    try (JsonReader jsonReader = getJsonReader(response)) {
+                        return gson.fromJson(jsonReader, FieldBean.class);
+                    }
+                } else {
+                    throw new RestException(response);
+                }
             }
         });
     }

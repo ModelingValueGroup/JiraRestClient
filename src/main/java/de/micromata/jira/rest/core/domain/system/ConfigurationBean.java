@@ -8,19 +8,19 @@ import com.google.gson.annotations.Expose;
 public class ConfigurationBean {
 
     @Expose
-    private boolean votingEnabled;
+    private boolean                       votingEnabled;
     @Expose
-    private boolean watchingEnabled;
+    private boolean                       watchingEnabled;
     @Expose
-    private boolean unassignedIssuesAllowed;
+    private boolean                       unassignedIssuesAllowed;
     @Expose
-    private boolean subTasksEnabled;
+    private boolean                       subTasksEnabled;
     @Expose
-    private boolean issueLinkingEnabled;
+    private boolean                       issueLinkingEnabled;
     @Expose
-    private boolean timeTrackingEnabled;
+    private boolean                       timeTrackingEnabled;
     @Expose
-    private boolean attachmentsEnabled;
+    private boolean                       attachmentsEnabled;
     @Expose
     private TimeTrackingConfigurationBean timeTrackingConfiguration;
 

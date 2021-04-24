@@ -1,8 +1,6 @@
 package de.micromata.jira.rest.core.domain.customFields;
 
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Created by cschulc on 19.02.16.
  */
@@ -14,9 +12,11 @@ public enum CustomFieldType {
     TEXT("com.atlassian.jira.plugin.system.customfieldtypes:textfield", false),
     TEXTAREA("com.atlassian.jira.plugin.system.customfieldtypes:textarea", false),
     FLOAT("com.atlassian.jira.plugin.system.customfieldtypes:float", false),
+
     // Single ValueBean Custom Fields
     SELECT("com.atlassian.jira.plugin.system.customfieldtypes:select", true),
     RADIO("com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons", true),
+
     // Multi ValueBean Custom Fields
     MULTISELECT("com.atlassian.jira.plugin.system.customfieldtypes:multiselect", true),
     CHECKBOX("com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes", true),
@@ -36,9 +36,9 @@ public enum CustomFieldType {
         this.hasAllowedValues = hasAllowedValues;
     }
 
-    private String jiraName;
+    private final String jiraName;
 
-    private boolean hasAllowedValues;
+    private final boolean hasAllowedValues;
 
     public String getJiraName() {
         return jiraName;

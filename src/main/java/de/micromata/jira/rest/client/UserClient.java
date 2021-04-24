@@ -1,12 +1,12 @@
 package de.micromata.jira.rest.client;
 
-import de.micromata.jira.rest.core.domain.UserBean;
-import de.micromata.jira.rest.core.domain.permission.MyPermissionsBean;
-import de.micromata.jira.rest.core.util.RestException;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Future;
+
+import de.micromata.jira.rest.core.domain.UserBean;
+import de.micromata.jira.rest.core.domain.permission.MyPermissionsBean;
+import de.micromata.jira.rest.core.util.RestException;
 
 /**
  * User: Christian Schulze
@@ -20,7 +20,7 @@ public interface UserClient {
      * Returns a List of UserBean which are assignable to Issue in a Project
      *
      * @param projectKey the projectkey
-     * @param startAt start at position (0-based) can be null the default (0)
+     * @param startAt    start at position (0-based) can be null the default (0)
      * @param maxResults Number of Results (default 50) can be null then default (50)
      * @return The List of a assignable Users, or an Empty List if the logged in User has no permission to get assign Issues
      */
@@ -30,8 +30,8 @@ public interface UserClient {
     /**
      * Returns a List of UserBean which are assignable to an Issue
      *
-     * @param issueKey The Issuekey
-     * @param startAt start at position (0-based) can be null the default (0)
+     * @param issueKey   The Issuekey
+     * @param startAt    start at position (0-based) can be null the default (0)
      * @param maxResults Number of Results (default 50) can be null then default (50)
      * @return The List of a assignable Users, or an Empty List if the logged in User has no permission to get assign Issues
      */

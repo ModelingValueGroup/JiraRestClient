@@ -1,20 +1,18 @@
-
 package de.micromata.jira.rest.core.domain;
-
-import com.google.gson.annotations.Expose;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.annotations.Expose;
 
-public class Changelog {
 
+public class ChangelogBean {
     @Expose
-    private Integer startAt;
+    private long          startAt;
     @Expose
-    private Integer maxResults;
+    private long          maxResults;
     @Expose
-    private Integer total;
+    private long          total;
     @Expose
     private List<History> histories = new ArrayList<>();
 
@@ -26,27 +24,27 @@ public class Changelog {
         this.histories = histories;
     }
 
-    public Integer getMaxResults() {
+    public long getMaxResults() {
         return maxResults;
     }
 
-    public void setMaxResults(Integer maxResults) {
+    public void setMaxResults(long maxResults) {
         this.maxResults = maxResults;
     }
 
-    public Integer getStartAt() {
+    public long getStartAt() {
         return startAt;
     }
 
-    public void setStartAt(Integer startAt) {
+    public void setStartAt(long startAt) {
         this.startAt = startAt;
     }
 
-    public Integer getTotal() {
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(Integer total) {
+    public void setTotal(long total) {
         this.total = total;
     }
 }

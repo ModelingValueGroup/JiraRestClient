@@ -52,33 +52,25 @@ import de.micromata.jira.rest.core.util.URIHelper;
  * Date: 22.08.2014
  */
 public class JiraRestClient implements RestParamConstants, RestPathConstants {
+    private static final String                 HTTP         = "http";
+    private static final String                 HTTPS        = "https";
+    private static final Map<String, FieldBean> customfields = new HashMap<>();
+    private static       RequestConfig          requestConfig;
 
-
-    private static final String HTTP = "http";
-    private static final String HTTPS = "https";
-
-    protected final ExecutorService executorService;
-
-    private URI baseUri;
-    private String username = StringUtils.EMPTY;
-    private CloseableHttpClient httpclient;
-    private HttpHost proxyHost;
-    private CookieStore cookieStore = new BasicCookieStore();
-    private HttpClientContext clientContext;
-
-    private static Map<String, FieldBean> customfields;
-
-    private static RequestConfig requestConfig;
-
-    private IssueClient issueClient;
-
-    private UserClient userClient;
-
-    private SearchClient searchClient;
-
-    private ProjectClient projectClient;
-
-    private SystemClient systemClient;
+    protected final ExecutorService     executorService;
+    private         URI                 baseUri;
+    private         String              username    = StringUtils.EMPTY;
+    private         CloseableHttpClient httpclient;
+    private         HttpHost            proxyHost;
+    @SuppressWarnings("unused")
+    private final   CookieStore         cookieStore = new BasicCookieStore();
+    private         HttpClientContext   clientContext;
+    //
+    private         IssueClient         issueClient;
+    private         UserClient          userClient;
+    private         SearchClient        searchClient;
+    private         ProjectClient       projectClient;
+    private         SystemClient        systemClient;
 
     public JiraRestClient(ExecutorService executorService) {
         this.executorService = executorService;
@@ -95,15 +87,16 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
      * @param username = login name
      * @param password = login password
      * @return 200 succees, 401 for wrong credentials and 403 for captcha is needed, you have to login at the jira website
-     * @throws de.micromata.jira.rest.core.util.RestException
      */
     public int connect(URI uri, String username, String password, HttpHost proxyHost) throws IOException, URISyntaxException, ExecutionException, InterruptedException {
         this.username = username;
-        String host = uri.getHost();
-        int port = getPort(uri.toURL());
+        String host   = uri.getHost();
+        int    port   = getPort(uri.toURL());
         String scheme = HTTP;
-        if (port == 443) scheme = HTTPS;
-        HttpHost target = new HttpHost(host, port, scheme);
+        if (port == 443) {
+            scheme = HTTPS;
+        }
+        HttpHost            target        = new HttpHost(host, port, scheme);
         CredentialsProvider credsProvider = new BasicCredentialsProvider();
         credsProvider.setCredentials(
                 new AuthScope(target.getHostName(), target.getPort()),
@@ -123,20 +116,19 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
         this.baseUri = buildBaseURI(uri);
 
         // setzen des Proxies
-        if(proxyHost != null){
+        if (proxyHost != null) {
             this.proxyHost = proxyHost;
             requestConfig = RequestConfig.custom().setProxy(proxyHost).build();
         }
 
-        URIBuilder uriBuilder = URIHelper.buildPath(baseUri, MYSELF);
-        HttpGet method = HttpMethodFactory.createGetMethod(uriBuilder.build());
-        CloseableHttpResponse response = httpclient.execute(method, clientContext);
-        int statusCode = response.getStatusLine().getStatusCode();
+        URIBuilder            uriBuilder = URIHelper.buildPath(baseUri, MYSELF);
+        HttpGet               method     = HttpMethodFactory.createGetMethod(uriBuilder.build());
+        CloseableHttpResponse response   = httpclient.execute(method, clientContext);
+        int                   statusCode = response.getStatusLine().getStatusCode();
         if (statusCode == 200) {
             // Get the Cache for the CustomFields, need to deserialize the customFields in Issue Json
             Future<List<FieldBean>> allCustomFields = getSystemClient().getAllCustomFields();
-            List<FieldBean> fieldBeen = allCustomFields.get();
-            customfields = new HashMap<>();
+            List<FieldBean>         fieldBeen       = allCustomFields.get();
             for (FieldBean fieldBean : fieldBeen) {
                 customfields.put(fieldBean.getId(), fieldBean);
             }
@@ -156,8 +148,8 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
     /**
      * Extract port from URL
      *
-     * @param endpointUrl
-     * @return
+     * @param endpointUrl the endpoint url
+     * @return the port
      */
     private int getPort(URL endpointUrl) {
         int port = (endpointUrl.getPort() != -1 ? endpointUrl.getPort() : endpointUrl.getDefaultPort());
@@ -171,50 +163,42 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
     }
 
     private URI buildBaseURI(URI uri) throws URISyntaxException {
-        String path = uri.getPath();
-        if (path.isEmpty() == false) {
-            if (path.endsWith("/")) {
-                path = path.substring(0, path.length() - 1);
-            }
-            path = path.concat(RestPathConstants.BASE_REST_PATH);
-        } else {
-            path = RestPathConstants.BASE_REST_PATH;
-        }
+        String path = uri.getPath().replaceAll("/*$", "").concat(RestPathConstants.BASE_REST_PATH);
         return new URIBuilder(uri).setPath(path).build();
     }
 
 
     public IssueClient getIssueClient() {
         if (issueClient == null) {
-            issueClient = new IssueClientImpl(this, executorService);
+            issueClient = new IssueClientImpl(this);
         }
         return issueClient;
     }
 
     public ProjectClient getProjectClient() {
         if (projectClient == null) {
-            projectClient = new ProjectClientImpl(this, executorService);
+            projectClient = new ProjectClientImpl(this);
         }
         return projectClient;
     }
 
     public SearchClient getSearchClient() {
         if (searchClient == null) {
-            searchClient = new SearchClientImpl(this, executorService);
+            searchClient = new SearchClientImpl(this);
         }
         return searchClient;
     }
 
     public SystemClient getSystemClient() {
         if (systemClient == null) {
-            systemClient = new SystemClientImpl(this, executorService);
+            systemClient = new SystemClientImpl(this);
         }
         return systemClient;
     }
 
     public UserClient getUserClient() {
         if (userClient == null) {
-            userClient = new UserClientImpl(this, executorService);
+            userClient = new UserClientImpl(this);
         }
         return userClient;
     }
@@ -242,5 +226,9 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
 
     public HttpHost getProxy() {
         return proxyHost;
+    }
+
+    public ExecutorService getExecutorService() {
+        return executorService;
     }
 }

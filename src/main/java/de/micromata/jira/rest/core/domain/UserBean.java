@@ -2,22 +2,23 @@ package de.micromata.jira.rest.core.domain;
 
 import com.google.gson.annotations.Expose;
 
-public class UserBean extends BaseBean{
-
+public class UserBean extends BaseBean {
     @Expose
-    private Boolean active;
+    private boolean        active;
     @Expose
     private AvatarUrlsBean avatarUrls;
     @Expose
-    private String displayName;
+    private String         displayName;
     @Expose
-    private String emailAddress;
+    private String         emailAddress;
+    @Expose
+    private String         timeZone;
 
-    public Boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
+    public void setActive(boolean active) {
         this.active = active;
     }
 
@@ -45,4 +46,11 @@ public class UserBean extends BaseBean{
         this.emailAddress = emailAddress;
     }
 
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public void setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+    }
 }

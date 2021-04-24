@@ -1,32 +1,31 @@
 package de.micromata.jira.rest.core.domain.filter;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Subscriptions {
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
+public class SubscriptionsBean {
     @Expose
-    private Integer size;
+    private long         size;
     @Expose
     private List<Object> items = new ArrayList<>();
     @SerializedName("max-results")
     @Expose
-    private Integer maxResults;
+    private long         maxResults;
     @SerializedName("start-index")
     @Expose
-    private Integer startIndex;
+    private long         startIndex;
     @SerializedName("end-index")
     @Expose
-    private Integer endIndex;
+    private long         endIndex;
 
-    public Integer getEndIndex() {
+    public long getEndIndex() {
         return endIndex;
     }
 
-    public void setEndIndex(Integer endIndex) {
+    public void setEndIndex(long endIndex) {
         this.endIndex = endIndex;
     }
 
@@ -38,27 +37,27 @@ public class Subscriptions {
         this.items = items;
     }
 
-    public Integer getMaxResults() {
+    public long getMaxResults() {
         return maxResults;
     }
 
-    public void setMaxResults(Integer maxResults) {
+    public void setMaxResults(long maxResults) {
         this.maxResults = maxResults;
     }
 
-    public Integer getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(long size) {
         this.size = size;
     }
 
-    public Integer getStartIndex() {
+    public long getStartIndex() {
         return startIndex;
     }
 
-    public void setStartIndex(Integer startIndex) {
+    public void setStartIndex(long startIndex) {
         this.startIndex = startIndex;
     }
 }
