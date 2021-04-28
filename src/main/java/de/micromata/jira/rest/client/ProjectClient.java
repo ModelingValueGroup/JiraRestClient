@@ -1,7 +1,7 @@
 package de.micromata.jira.rest.client;
 
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import de.micromata.jira.rest.core.domain.ComponentBean;
 import de.micromata.jira.rest.core.domain.ProjectBean;
@@ -23,7 +23,7 @@ public interface ProjectClient {
      * @return list of projects
      * @throws RestException
      */
-    Future<List<ProjectBean>> getAllProjects();
+    CompletableFuture<List<ProjectBean>> getAllProjects();
 
     /**
      * Returns a full representation of the project for the given key.
@@ -32,7 +32,7 @@ public interface ProjectClient {
      * @return all informations for the project
      * @throws RestException
      */
-    Future<ProjectBean> getProjectByKey(final String projectKey);
+    CompletableFuture<ProjectBean> getProjectByKey(final String projectKey);
 
     /**
      * Returns a list of all versions for a project.
@@ -41,7 +41,7 @@ public interface ProjectClient {
      * @return list of versions
      * @throws RestException
      */
-    Future<List<VersionBean>> getProjectVersions(final String projectKey);
+    CompletableFuture<List<VersionBean>> getProjectVersions(final String projectKey);
 
 
     /**
@@ -51,7 +51,7 @@ public interface ProjectClient {
      * @return list of components
      * @throws RestException
      */
-    Future<List<ComponentBean>> getProjectComponents(final String projectKey);
+    CompletableFuture<List<ComponentBean>> getProjectComponents(final String projectKey);
 
 
     /**
@@ -60,6 +60,6 @@ public interface ProjectClient {
      * @param projectKey
      * @return
      */
-    Future<MetaBean> getIssueTypesMetaForProject(final String projectKey);
+    CompletableFuture<MetaBean> getIssueTypesMetaForProject(final String projectKey);
 
 }

@@ -2,7 +2,7 @@ package de.micromata.jira.rest.client;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import de.micromata.jira.rest.core.domain.AttachmentMetaBean;
 import de.micromata.jira.rest.core.domain.IssuetypeBean;
@@ -25,7 +25,7 @@ public interface SystemClient {
      * @throws RestException
      * @throws IOException
      */
-    Future<ConfigurationBean> getConfiguration();
+    CompletableFuture<ConfigurationBean> getConfiguration();
 
     /**
      * Returns a list of all issue types visible to the connected client.
@@ -33,7 +33,7 @@ public interface SystemClient {
      * @return list of issue types
      * @throws de.micromata.jira.rest.core.util.RestException
      */
-    Future<List<IssuetypeBean>> getIssueTypes();
+    CompletableFuture<List<IssuetypeBean>> getIssueTypes();
 
     /**
      * Returns a list of all statuses.
@@ -41,7 +41,7 @@ public interface SystemClient {
      * @return list of statuses
      * @throws RestException
      */
-    Future<List<StatusBean>> getStates();
+    CompletableFuture<List<StatusBean>> getStates();
 
 
     /**
@@ -50,7 +50,7 @@ public interface SystemClient {
      * @return
      * @throws RestException
      */
-    Future<List<PriorityBean>> getPriorities();
+    CompletableFuture<List<PriorityBean>> getPriorities();
 
 
     /**
@@ -58,7 +58,7 @@ public interface SystemClient {
      *
      * @return a List of FieldBean
      */
-    Future<List<FieldBean>> getAllFields();
+    CompletableFuture<List<FieldBean>> getAllFields();
 
 
     /**
@@ -66,12 +66,12 @@ public interface SystemClient {
      *
      * @return a List of FieldBean
      */
-    Future<List<FieldBean>> getAllCustomFields();
+    CompletableFuture<List<FieldBean>> getAllCustomFields();
 
     /**
      * Return a Custom Field by Id
      */
-    Future<FieldBean> getCustomFieldById(String id);
+    CompletableFuture<FieldBean> getCustomFieldById(String id);
 
 
     /**
@@ -79,7 +79,7 @@ public interface SystemClient {
      *
      * @return AttachmentMetaBean
      */
-    Future<AttachmentMetaBean> getAttachmentMeta();
+    CompletableFuture<AttachmentMetaBean> getAttachmentMeta();
 
     /**
      * Creates a Custom Field
@@ -87,6 +87,6 @@ public interface SystemClient {
      * @param fieldBean The CreateFieldBean with the create Informations
      * @return The created Field as FieldBean
      */
-    Future<FieldBean> createCustomField(CreateFieldBean fieldBean);
+    CompletableFuture<FieldBean> createCustomField(CreateFieldBean fieldBean);
 
 }

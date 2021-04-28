@@ -2,7 +2,7 @@ package de.micromata.jira.rest.core;
 
 import java.net.HttpURLConnection;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -28,7 +28,7 @@ public class ProjectClientImpl extends BaseClient implements ProjectClient, Rest
         super(jiraRestClient);
     }
 
-    public Future<ProjectBean> getProjectByKey(final String projectKey) {
+    public CompletableFuture<ProjectBean> getProjectByKey(final String projectKey) {
         Validate.notNull(projectKey);
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(PROJECT, projectKey)) {
@@ -44,7 +44,7 @@ public class ProjectClientImpl extends BaseClient implements ProjectClient, Rest
         });
     }
 
-    public Future<List<ProjectBean>> getAllProjects() {
+    public CompletableFuture<List<ProjectBean>> getAllProjects() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(PROJECT)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -59,7 +59,7 @@ public class ProjectClientImpl extends BaseClient implements ProjectClient, Rest
         });
     }
 
-    public Future<List<VersionBean>> getProjectVersions(final String projectKey) {
+    public CompletableFuture<List<VersionBean>> getProjectVersions(final String projectKey) {
         Validate.notNull(projectKey);
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(PROJECT, projectKey, VERSIONS)) {
@@ -75,7 +75,7 @@ public class ProjectClientImpl extends BaseClient implements ProjectClient, Rest
         });
     }
 
-    public Future<List<ComponentBean>> getProjectComponents(final String projectKey) {
+    public CompletableFuture<List<ComponentBean>> getProjectComponents(final String projectKey) {
         Validate.notNull(projectKey);
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(PROJECT, projectKey, COMPONENTS)) {
@@ -92,7 +92,7 @@ public class ProjectClientImpl extends BaseClient implements ProjectClient, Rest
     }
 
     @Override
-    public Future<MetaBean> getIssueTypesMetaForProject(final String projectKey) {
+    public CompletableFuture<MetaBean> getIssueTypesMetaForProject(final String projectKey) {
         Validate.notNull(projectKey);
         return submit(() -> {
             URIBuilder uriBuilder = buildPath(ISSUE, CREATEMETA)

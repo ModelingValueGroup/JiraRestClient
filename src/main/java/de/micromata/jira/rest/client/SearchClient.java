@@ -1,7 +1,7 @@
 package de.micromata.jira.rest.client;
 
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import de.micromata.jira.rest.core.domain.JqlSearchResult;
 import de.micromata.jira.rest.core.domain.filter.FilterBean;
@@ -20,7 +20,7 @@ public interface SearchClient {
      * @return list of issues
      * @throws de.micromata.jira.rest.core.util.RestException
      */
-    Future<JqlSearchResult> searchIssues(JqlSearchBean jsb);
+    CompletableFuture<JqlSearchResult> searchIssues(JqlSearchBean jsb);
 
     /**
      * Create a new Search Filter for the logged in User
@@ -28,7 +28,7 @@ public interface SearchClient {
      * @param filter
      * @return
      */
-    Future<FilterBean> createSearchFilter(FilterBean filter);
+    CompletableFuture<FilterBean> createSearchFilter(FilterBean filter);
 
 
     /**
@@ -36,7 +36,7 @@ public interface SearchClient {
      *
      * @return List of FilterBeans
      */
-    Future<List<FilterBean>> getFavoriteFilter();
+    CompletableFuture<List<FilterBean>> getFavoriteFilter();
 
     /**
      * Get Filter by Id
@@ -44,7 +44,7 @@ public interface SearchClient {
      * @param id the id of the filter
      * @return FilterBean
      */
-    Future<FilterBean> getFilterById(String id);
+    CompletableFuture<FilterBean> getFilterById(String id);
 
 
 }

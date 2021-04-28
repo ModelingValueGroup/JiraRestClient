@@ -7,9 +7,9 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Future;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
@@ -127,9 +127,9 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
         int                   statusCode = response.getStatusLine().getStatusCode();
         if (statusCode == 200) {
             // Get the Cache for the CustomFields, need to deserialize the customFields in Issue Json
-            Future<List<FieldBean>> allCustomFields = getSystemClient().getAllCustomFields();
-            List<FieldBean>         fieldBeen       = allCustomFields.get();
-            for (FieldBean fieldBean : fieldBeen) {
+            CompletableFuture<List<FieldBean>> allCustomFields = getSystemClient().getAllCustomFields();
+            List<FieldBean>                    fieldBeans       = allCustomFields.get();
+            for (FieldBean fieldBean : fieldBeans) {
                 customfields.put(fieldBean.getId(), fieldBean);
             }
         }

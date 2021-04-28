@@ -60,14 +60,14 @@ public class JqlSearchBean {
      */
     public JqlSearchBean addField(EField... fields) {
         for (EField f : fields) {
-            getFields().add(""+f);
+            getFields().add("" + f);
         }
         return this;
     }
 
     public JqlSearchBean addNotField(EField... fields) {
         for (EField f : fields) {
-            getFields().add("-"+f);
+            getFields().add("-" + f);
         }
         return this;
     }
@@ -93,8 +93,9 @@ public class JqlSearchBean {
      *
      * @param startAt the new start at
      */
-    public void setStartAt(Integer startAt) {
+    public JqlSearchBean setStartAt(Integer startAt) {
         this.startAt = startAt;
+        return this;
     }
 
     /**
@@ -111,8 +112,9 @@ public class JqlSearchBean {
      *
      * @param maxResults the new max result
      */
-    public void setMaxResults(Integer maxResults) {
+    public JqlSearchBean setMaxResults(Integer maxResults) {
         this.maxResults = maxResults;
+        return this;
     }
 
     /**

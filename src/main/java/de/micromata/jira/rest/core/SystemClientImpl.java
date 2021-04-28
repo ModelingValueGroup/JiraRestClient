@@ -3,7 +3,7 @@ package de.micromata.jira.rest.core;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
 
@@ -33,7 +33,7 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
     }
 
     @Override
-    public Future<ConfigurationBean> getConfiguration() {
+    public CompletableFuture<ConfigurationBean> getConfiguration() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(CONFIGURATION)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -48,7 +48,7 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-    public Future<List<IssuetypeBean>> getIssueTypes() {
+    public CompletableFuture<List<IssuetypeBean>> getIssueTypes() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(ISSUETPYES)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -64,7 +64,7 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
 
     }
 
-    public Future<List<StatusBean>> getStates() {
+    public CompletableFuture<List<StatusBean>> getStates() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(STATUS)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -79,7 +79,7 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-    public Future<List<PriorityBean>> getPriorities() {
+    public CompletableFuture<List<PriorityBean>> getPriorities() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(PRIORITY)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -94,7 +94,7 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-    public Future<List<FieldBean>> getAllFields() {
+    public CompletableFuture<List<FieldBean>> getAllFields() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(FIELD)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -109,10 +109,10 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-    public Future<List<FieldBean>> getAllCustomFields() {
+    public CompletableFuture<List<FieldBean>> getAllCustomFields() {
         return submit(() -> {
             List<FieldBean>         retval    = new ArrayList<>();
-            Future<List<FieldBean>> allFields = getAllFields();
+            CompletableFuture<List<FieldBean>> allFields = getAllFields();
             List<FieldBean>         fieldBeen = allFields.get();
             for (FieldBean fieldBean : fieldBeen) {
                 if (fieldBean.isCustom()) {
@@ -123,9 +123,9 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-    public Future<FieldBean> getCustomFieldById(final String id) {
+    public CompletableFuture<FieldBean> getCustomFieldById(final String id) {
         return submit(() -> {
-            Future<List<FieldBean>> allFields = getAllFields();
+            CompletableFuture<List<FieldBean>> allFields = getAllFields();
             List<FieldBean>         fieldBeen = allFields.get();
             for (FieldBean fieldBean : fieldBeen) {
                 if (!fieldBean.isCustom()) {
@@ -139,12 +139,12 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
         });
     }
 
-    public Future<AttachmentMetaBean> getAttachmentMeta() {
+    public CompletableFuture<AttachmentMetaBean> getAttachmentMeta() {
         return null;
     }
 
     @Override
-    public Future<FieldBean> createCustomField(CreateFieldBean customField) {
+    public CompletableFuture<FieldBean> createCustomField(CreateFieldBean customField) {
         return submit(() -> {
             try (CloseableHttpResponse response = executePost(customField, FIELD)) {
                 int statusCode = response.getStatusLine().getStatusCode();

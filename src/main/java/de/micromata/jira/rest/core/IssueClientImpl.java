@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
@@ -47,7 +47,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         super(jiraRestClient);
     }
 
-    public Future<IssueResponse> createIssue(final IssueBean issue) {
+    public CompletableFuture<IssueResponse> createIssue(final IssueBean issue) {
         Validate.notNull(issue);
         return submit(() -> {
             String json = gson.toJson(issue);
@@ -72,7 +72,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
 
     }
 
-    public Future<IssueBean> updateIssue(final String issueKey, final IssueUpdate issueUpdate) {
+    public CompletableFuture<IssueBean> updateIssue(final String issueKey, final IssueUpdate issueUpdate) {
         Validate.notNull(issueKey);
         Validate.notNull(issueUpdate);
         return submit(() -> {
@@ -88,11 +88,11 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         });
     }
 
-    public Future<IssueBean> getIssueByKey(final String issueKey) {
+    public CompletableFuture<IssueBean> getIssueByKey(final String issueKey) {
         return getIssueByKey(issueKey, null, null);
     }
 
-    public Future<IssueBean> getIssueByKey(final String issueKey, final List<String> fields, final List<String> expand) {
+    public CompletableFuture<IssueBean> getIssueByKey(final String issueKey, final List<String> fields, final List<String> expand) {
         Validate.notNull(issueKey);
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(fields, expand, ISSUE, issueKey)) {
@@ -108,7 +108,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         });
     }
 
-    public Future<CommentsBean> getCommentsByIssue(final String issueKey) {
+    public CompletableFuture<CommentsBean> getCommentsByIssue(final String issueKey) {
         Validate.notNull(issueKey);
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(ISSUE, issueKey, COMMENT)) {
@@ -124,11 +124,11 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         });
     }
 
-    public Future<WorklogBean> getWorklogByIssue(final String issueKey) {
+    public CompletableFuture<WorklogBean> getWorklogByIssue(final String issueKey) {
         return getWorklogByIssue(issueKey, null, null);
     }
 
-    public Future<WorklogBean> getWorklogByIssue(final String issueKey, final List<String> fields, final List<String> expand) {
+    public CompletableFuture<WorklogBean> getWorklogByIssue(final String issueKey, final List<String> fields, final List<String> expand) {
         Validate.notNull(issueKey);
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(fields, expand, ISSUE, issueKey, WORKLOG)) {
@@ -159,7 +159,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         }
     }
 
-    public Future<Byte[]> getAttachment(final URI uri) {
+    public CompletableFuture<Byte[]> getAttachment(final URI uri) {
         Validate.notNull(uri);
         return submit(() -> {
             try (CloseableHttpResponse response = executeGetForFile(uri)) {
@@ -177,7 +177,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         return null;
     }
 
-    public Future<AttachmentBean> getAttachment(final long id) {
+    public CompletableFuture<AttachmentBean> getAttachment(final long id) {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(ATTACHMENT, String.valueOf(id))) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -192,7 +192,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         });
     }
 
-    public Future<List<AttachmentBean>> saveAttachmentToIssue(String issuekey, File... files) {
+    public CompletableFuture<List<AttachmentBean>> saveAttachmentToIssue(String issuekey, File... files) {
         return submit(() -> {
             URIBuilder uriBuilder = buildPath(ISSUE, issuekey, ATTACHMENTS);
             HttpPost   postMethod = new HttpPost(uriBuilder.build());
@@ -253,7 +253,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
         }
     }
 
-    public Future<List<TransitionBean>> getIssueTransitionsByKey(final String issueKey) {
+    public CompletableFuture<List<TransitionBean>> getIssueTransitionsByKey(final String issueKey) {
         Validate.notNull(issueKey);
         return submit(() -> {
             URIBuilder uriBuilder = buildPath(ISSUE, issueKey, TRANSITIONS).addParameter(EXPAND, TRANSITIONS_FIELDS);

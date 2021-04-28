@@ -2,7 +2,7 @@ package de.micromata.jira.rest.core;
 
 import java.net.HttpURLConnection;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.lang3.Validate;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -27,7 +27,7 @@ public class SearchClientImpl extends BaseClient implements SearchClient, RestPa
         super(jiraRestClient);
     }
 
-    public Future<JqlSearchResult> searchIssues(final JqlSearchBean jsb) {
+    public CompletableFuture<JqlSearchResult> searchIssues(final JqlSearchBean jsb) {
         Validate.notNull(jsb);
         return submit(() -> {
             String json = gson.toJson(jsb);
@@ -45,7 +45,7 @@ public class SearchClientImpl extends BaseClient implements SearchClient, RestPa
 
     }
 
-    public Future<FilterBean> createSearchFilter(FilterBean filter) {
+    public CompletableFuture<FilterBean> createSearchFilter(FilterBean filter) {
         return submit(() -> {
             try (CloseableHttpResponse response = executePost(filter, FILTER)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -60,7 +60,7 @@ public class SearchClientImpl extends BaseClient implements SearchClient, RestPa
         });
     }
 
-    public Future<List<FilterBean>> getFavoriteFilter() {
+    public CompletableFuture<List<FilterBean>> getFavoriteFilter() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(FILTER, FAVORITE)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -75,7 +75,7 @@ public class SearchClientImpl extends BaseClient implements SearchClient, RestPa
         });
     }
 
-    public Future<FilterBean> getFilterById(String id) {
+    public CompletableFuture<FilterBean> getFilterById(String id) {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(FILTER, id)) {
                 int statusCode = response.getStatusLine().getStatusCode();

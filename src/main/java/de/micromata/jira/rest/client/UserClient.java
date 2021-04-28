@@ -2,7 +2,7 @@ package de.micromata.jira.rest.client;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import de.micromata.jira.rest.core.domain.UserBean;
 import de.micromata.jira.rest.core.domain.permission.MyPermissionsBean;
@@ -24,7 +24,7 @@ public interface UserClient {
      * @param maxResults Number of Results (default 50) can be null then default (50)
      * @return The List of a assignable Users, or an Empty List if the logged in User has no permission to get assign Issues
      */
-    Future<List<UserBean>> getAssignableUserForProject(String projectKey, Integer startAt, Integer maxResults) throws RestException, IOException;
+    CompletableFuture<List<UserBean>> getAssignableUserForProject(String projectKey, Integer startAt, Integer maxResults) throws RestException, IOException;
 
 
     /**
@@ -35,7 +35,7 @@ public interface UserClient {
      * @param maxResults Number of Results (default 50) can be null then default (50)
      * @return The List of a assignable Users, or an Empty List if the logged in User has no permission to get assign Issues
      */
-    Future<List<UserBean>> getAssignableUsersForIssue(String issueKey, Integer startAt, Integer maxResults) throws RestException, IOException;
+    CompletableFuture<List<UserBean>> getAssignableUsersForIssue(String issueKey, Integer startAt, Integer maxResults) throws RestException, IOException;
 
     /**
      * Returns a User by his username
@@ -43,7 +43,7 @@ public interface UserClient {
      * @param username The username of the User
      * @return The UserBean for the username or null if the logged in User has no permission to get another user
      */
-    Future<UserBean> getUserByUsername(String username);
+    CompletableFuture<UserBean> getUserByUsername(String username);
 
     /**
      * Returns the logged in remote user.
@@ -51,7 +51,7 @@ public interface UserClient {
      * @return logged in user
      * @throws RestException
      */
-    Future<UserBean> getLoggedInRemoteUser() throws RestException, IOException;
+    CompletableFuture<UserBean> getLoggedInRemoteUser() throws RestException, IOException;
 
     /**
      * Get the Permissions for the logged in User.
@@ -59,5 +59,5 @@ public interface UserClient {
      *
      * @return PermissionsBean with all Permission,
      */
-    Future<MyPermissionsBean> getMyPermissions();
+    CompletableFuture<MyPermissionsBean> getMyPermissions();
 }

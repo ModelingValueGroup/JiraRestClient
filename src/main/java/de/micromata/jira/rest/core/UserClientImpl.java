@@ -3,7 +3,7 @@ package de.micromata.jira.rest.core;
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Future;
+import java.util.concurrent.CompletableFuture;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
@@ -29,15 +29,15 @@ public class UserClientImpl extends BaseClient implements UserClient, RestPathCo
         super(jiraRestClient);
     }
 
-    public Future<List<UserBean>> getAssignableUserForProject(String projectKey, Integer startAt, Integer maxResults) {
+    public CompletableFuture<List<UserBean>> getAssignableUserForProject(String projectKey, Integer startAt, Integer maxResults) {
         return getAssignableSearch(null, null, projectKey, startAt, maxResults);
     }
 
-    public Future<List<UserBean>> getAssignableUsersForIssue(String issueKey, Integer startAt, Integer maxResults) {
+    public CompletableFuture<List<UserBean>> getAssignableUsersForIssue(String issueKey, Integer startAt, Integer maxResults) {
         return getAssignableSearch(null, issueKey, null, startAt, maxResults);
     }
 
-    public Future<UserBean> getUserByUsername(final String username) {
+    public CompletableFuture<UserBean> getUserByUsername(final String username) {
         Validate.notNull(username);
         return submit(() -> {
             URIBuilder uriBuilder = buildPath(USER);
@@ -57,12 +57,12 @@ public class UserClientImpl extends BaseClient implements UserClient, RestPathCo
         });
     }
 
-    public Future<UserBean> getLoggedInRemoteUser() {
+    public CompletableFuture<UserBean> getLoggedInRemoteUser() {
         return getUserByUsername(getLoggedInUserName());
     }
 
     @Override
-    public Future<MyPermissionsBean> getMyPermissions() {
+    public CompletableFuture<MyPermissionsBean> getMyPermissions() {
         return submit(() -> {
             try (CloseableHttpResponse response = executeGet(MYPERMISSIONS)) {
                 int statusCode = response.getStatusLine().getStatusCode();
@@ -77,7 +77,7 @@ public class UserClientImpl extends BaseClient implements UserClient, RestPathCo
         });
     }
 
-    private Future<List<UserBean>> getAssignableSearch(@SuppressWarnings("SameParameterValue") final String username, final String issueKey, final String projectKey, final Integer startAt, final Integer maxResults) {
+    private CompletableFuture<List<UserBean>> getAssignableSearch(@SuppressWarnings("SameParameterValue") final String username, final String issueKey, final String projectKey, final Integer startAt, final Integer maxResults) {
         return submit(() -> {
 
             URIBuilder uriBuilder = buildPath(USER, ASSIGNABLE, SEARCH);
