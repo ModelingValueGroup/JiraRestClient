@@ -6,9 +6,11 @@ package de.micromata.jira.rest.core.domain.update;
  * Date: 29.10.2014
  */
 public enum Operation {
-    SET("set"), EDIT("edit"), REMOVE("remove");
+    SET("set"),
+    EDIT("edit"),
+    REMOVE("remove");
 
-    private String name;
+    private final String name;
 
     Operation(String name) {
         this.name = name;

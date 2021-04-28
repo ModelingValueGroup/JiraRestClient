@@ -47,7 +47,7 @@ public class RestException extends Exception {
         this.restErrorMessage = restErrorMessage;
     }
 
-    public RestException(CloseableHttpResponse response) throws IOException {
+    public RestException(CloseableHttpResponse response) {
         StatusLine statusLine = response.getStatusLine();
         this.statusCode   = statusLine.getStatusCode();
         this.reasonPhrase = statusLine.getReasonPhrase();

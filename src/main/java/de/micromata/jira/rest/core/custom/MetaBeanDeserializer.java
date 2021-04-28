@@ -99,6 +99,7 @@ public class MetaBeanDeserializer extends BaseDeserializer implements JsonDeseri
         }
     }
 
+    @SuppressWarnings("DuplicateBranchesInSwitch")
     private FieldMetaBean extractCustomFieldMeta(String key, JsonElement json) {
         FieldMetaBean   fieldMetaBean   = gson.fromJson(json, FieldMetaBean.class);
         CustomFieldType customFieldType = getCustomFieldType(key);

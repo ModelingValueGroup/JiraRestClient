@@ -46,6 +46,10 @@
             <name>Vitali Filippow</name>
             <email>v.filippow@micromata.de</email>
         </developer>
+        <developer>
+            <name>Tom Brus</name>
+            <email>tombrus@gmail.com</email>
+        </developer>
     </developers>
 
     <dependencies>
