@@ -2,6 +2,16 @@
 
 A simple JAVA Client to access the [JIRA&copy; REST-API](https://docs.atlassian.com/jira/REST/cloud/).
 
+## This is a fork with major changes for our custom usage
+Forked from https://github.com/micromata/JiraRestClient.
+We made some substantial changes to the original code. Some highlights:
+- added Worklog calls
+- added IntelliJ setup
+- moved from maven to gradle
+- various optimisations en code refinements
+- some formatting adjustments
+- move to java 16
+
 ## Usage 
 
 Everything you need is a ExecutorService (java.util.concurrent.ExecutorService) for Thread-Pooling.

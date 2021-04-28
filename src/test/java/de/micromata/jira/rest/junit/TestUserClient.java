@@ -1,21 +1,24 @@
 package de.micromata.jira.rest.junit;
 
-import de.micromata.jira.rest.core.domain.UserBean;
-import de.micromata.jira.rest.core.domain.permission.MyPermissionsBean;
-import de.micromata.jira.rest.core.util.RestException;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import de.micromata.jira.rest.core.domain.UserBean;
+import de.micromata.jira.rest.core.domain.permission.MyPermissionsBean;
+import de.micromata.jira.rest.core.util.RestException;
 
 /**
  * User: Christian Schulze
  * Email: c.schulze@micromata.de
  * Date: 09.08.2014
  */
+@Ignore
 public class TestUserClient extends BaseTest {
 
 

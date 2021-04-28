@@ -1,23 +1,29 @@
 package de.micromata.jira.rest.junit;
 
-import de.micromata.jira.rest.core.domain.JqlSearchResult;
-import de.micromata.jira.rest.core.domain.filter.FilterBean;
-import de.micromata.jira.rest.core.jql.*;
-import de.micromata.jira.rest.core.util.RestException;
-
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import de.micromata.jira.rest.core.domain.JqlSearchResult;
+import de.micromata.jira.rest.core.domain.filter.FilterBean;
+import de.micromata.jira.rest.core.jql.EField;
+import de.micromata.jira.rest.core.jql.EOperator;
+import de.micromata.jira.rest.core.jql.JqlBuilder;
+import de.micromata.jira.rest.core.jql.JqlSearchBean;
+import de.micromata.jira.rest.core.jql.SortOrder;
+import de.micromata.jira.rest.core.util.RestException;
 
 /**
  * User: Christian Schulze
  * Email: c.schulze@micromata.de
  * Date: 11.08.2014
  */
+@Ignore
 public class TestSearchClient extends BaseTest {
 
     @Test

@@ -1,23 +1,26 @@
 package de.micromata.jira.rest.junit;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import de.micromata.jira.rest.core.domain.ComponentBean;
 import de.micromata.jira.rest.core.domain.ProjectBean;
 import de.micromata.jira.rest.core.domain.VersionBean;
 import de.micromata.jira.rest.core.domain.meta.MetaBean;
 import de.micromata.jira.rest.core.util.RestException;
-import org.junit.Assert;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 /**
  * User: Christian Schulze
  * Email: c.schulze@micromata.de
  * Date: 10.08.2014
  */
+@Ignore
 public class TestProjectClient extends BaseTest {
 
 

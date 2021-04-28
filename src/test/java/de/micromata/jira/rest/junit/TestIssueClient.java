@@ -1,19 +1,5 @@
 package de.micromata.jira.rest.junit;
 
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.core.domain.*;
-import de.micromata.jira.rest.core.domain.field.FieldBean;
-import de.micromata.jira.rest.core.domain.update.FieldOperation;
-import de.micromata.jira.rest.core.domain.update.IssueUpdate;
-import de.micromata.jira.rest.core.domain.update.Operation;
-import de.micromata.jira.rest.core.jql.EField;
-import de.micromata.jira.rest.core.misc.JsonConstants;
-import de.micromata.jira.rest.core.util.RestException;
-import de.micromata.jira.rest.core.util.URIHelper;
-import org.apache.commons.lang3.ArrayUtils;
-import org.junit.Assert;
-import org.junit.Test;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,12 +13,40 @@ import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import de.micromata.jira.rest.JiraRestClient;
+import de.micromata.jira.rest.core.domain.AttachmentBean;
+import de.micromata.jira.rest.core.domain.CommentBean;
+import de.micromata.jira.rest.core.domain.ComponentBean;
+import de.micromata.jira.rest.core.domain.FieldsBean;
+import de.micromata.jira.rest.core.domain.IssueBean;
+import de.micromata.jira.rest.core.domain.IssueResponse;
+import de.micromata.jira.rest.core.domain.IssuetypeBean;
+import de.micromata.jira.rest.core.domain.PriorityBean;
+import de.micromata.jira.rest.core.domain.ProjectBean;
+import de.micromata.jira.rest.core.domain.TransitionBean;
+import de.micromata.jira.rest.core.domain.UserBean;
+import de.micromata.jira.rest.core.domain.VersionBean;
+import de.micromata.jira.rest.core.domain.field.FieldBean;
+import de.micromata.jira.rest.core.domain.update.FieldOperation;
+import de.micromata.jira.rest.core.domain.update.IssueUpdate;
+import de.micromata.jira.rest.core.domain.update.Operation;
+import de.micromata.jira.rest.core.jql.EField;
+import de.micromata.jira.rest.core.misc.JsonConstants;
+import de.micromata.jira.rest.core.util.RestException;
+import de.micromata.jira.rest.core.util.URIHelper;
+
 
 /**
  * User: Christian Schulze
  * Email: c.schulze@micromata.de
  * Date: 11.08.2014
  */
+@Ignore
 public class TestIssueClient extends BaseTest {
 
     private static final String NEW_LINE = System.getProperty("line.separator");

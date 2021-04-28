@@ -1,6 +1,15 @@
 package de.micromata.jira.rest.junit;
 
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import org.junit.Assert;
+import org.junit.Ignore;
+import org.junit.Test;
+
 import de.micromata.jira.rest.core.domain.AttachmentMetaBean;
 import de.micromata.jira.rest.core.domain.IssuetypeBean;
 import de.micromata.jira.rest.core.domain.PriorityBean;
@@ -10,20 +19,13 @@ import de.micromata.jira.rest.core.domain.field.CreateFieldBean;
 import de.micromata.jira.rest.core.domain.field.FieldBean;
 import de.micromata.jira.rest.core.domain.system.ConfigurationBean;
 import de.micromata.jira.rest.core.util.RestException;
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 /**
  * User: Christian Schulze
  * Email: c.schulze@micromata.de
  * Date: 09.08.2014
  */
+@Ignore
 public class TestSystemClient extends BaseTest {
 
     private static final int DEFAULT_NUMBER_OF_ISSUETYPES = 6;
@@ -39,7 +41,7 @@ public class TestSystemClient extends BaseTest {
         ConfigurationBean configurationBean = future.get();
         Assert.assertNotNull(configurationBean);
         Assert.assertNotNull(configurationBean.getTimeTrackingConfiguration());
-        Assert.assertEquals(DEFAULT_WORKING_HOURS_PER_DAY, configurationBean.getTimeTrackingConfiguration().getWorkingHoursPerDay().intValue());
+        Assert.assertEquals(DEFAULT_WORKING_HOURS_PER_DAY, configurationBean.getTimeTrackingConfiguration().getWorkingHoursPerDay());
     }
 
     @Test
@@ -78,7 +80,7 @@ public class TestSystemClient extends BaseTest {
         Assert.assertFalse(fieldBeans.isEmpty());
         int numberOfFields = 0;
         for (FieldBean fieldBean : fieldBeans) {
-            if(fieldBean.getCustom() == false){
+            if(!fieldBean.isCustom()){
                 numberOfFields = numberOfFields + 1;
             }
         }

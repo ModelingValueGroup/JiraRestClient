@@ -49,6 +49,9 @@ public class JqlSearchBean {
     @Expose
     private List<String> expand = new ArrayList<>();
 
+    public JqlSearchBean() {
+    }
+
     public JqlSearchBean(String jql) {
         this.jql = jql;
     }
