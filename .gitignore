@@ -5,3 +5,4 @@ src/test/resource/config.properties
 .idea/
 jiraRestClient.iml
 /build/
+/.gradle/
