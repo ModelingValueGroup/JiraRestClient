@@ -10,7 +10,7 @@ repositories {
 dependencies {
     implementation("org.apache.httpcomponents:httpclient:4.5.2")
     implementation("org.apache.httpcomponents:httpmime:4.5.2")
-    implementation("com.google.code.gson:gson:2.2.2")
+    implementation("com.google.code.gson:gson:2.8.6")
     implementation("org.apache.commons:commons-lang3:3.4")
     implementation("javax.ws.rs:jsr311-api:1.1.1")
     implementation("commons-io:commons-io:2.4")
