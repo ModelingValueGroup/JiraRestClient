@@ -6,7 +6,6 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 
 public class ErrorBean {
-
     @Expose
     private List<String> errorMessages = new ArrayList<>();
     @Expose
@@ -26,5 +25,14 @@ public class ErrorBean {
 
     public void setErrorMessages(List<String> errorMessages) {
         this.errorMessages = errorMessages;
+    }
+
+    public void addMessage(String msg) {
+        errorMessages.add(msg);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + String.join(" & ", errorMessages) + "]";
     }
 }

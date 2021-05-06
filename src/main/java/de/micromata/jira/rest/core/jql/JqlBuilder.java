@@ -45,7 +45,7 @@ public class JqlBuilder {
             for (String s : operand) {
                 jql.append(del);
                 del = ",";
-                boolean hasSpaces = s.contains(" ");
+                boolean hasSpaces = s.contains(" ") || s.contains("/");
                 if (hasSpaces) {
                     jql.append("\"");
                 }

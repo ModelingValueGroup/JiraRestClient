@@ -3,6 +3,7 @@ package de.micromata.jira.rest.core.domain;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.util.Objects;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,7 +57,27 @@ public class BaseBean implements Comparable<BaseBean> {
 
     @Override
     public int compareTo(BaseBean o) {
-        return this.name.compareTo(o.getName());
+        return getKey().compareTo(o.getKey());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof BaseBean)) {
+            return false;
+        }
+        return getKey().equals(((BaseBean) o).getKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getKey());
+    }
+
+    private String getKey() {
+        return name+"::"+self;
     }
 
     @Override

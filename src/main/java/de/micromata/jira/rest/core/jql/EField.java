@@ -422,7 +422,7 @@ public enum EField {
      */
     EField(String field, EFieldType type) {
         this.field = field;
-        this.type = type;
+        this.type  = type;
     }
 
     /**

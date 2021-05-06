@@ -20,7 +20,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-import org.apache.http.StatusLine;
 import org.apache.http.client.methods.CloseableHttpResponse;
 
 import com.google.gson.Gson;
@@ -32,13 +31,14 @@ import de.micromata.jira.rest.core.domain.ErrorBean;
  * @author Vitali Filippow
  */
 public class RestException extends Exception {
-
-    private int statusCode;
-
-    private String reasonPhrase;
-
+    private int       statusCode;
+    private String    reasonPhrase;
     private ErrorBean restErrorMessage;
 
+
+    public RestException(CloseableHttpResponse response) {
+        this(response.getStatusLine().getStatusCode(), response.getStatusLine().getReasonPhrase(), getErrorBean(response));
+    }
 
     public RestException(int statusCode, String reasonPhrase, ErrorBean restErrorMessage) {
         super(statusCode + " " + reasonPhrase + " " + restErrorMessage);
@@ -47,22 +47,23 @@ public class RestException extends Exception {
         this.restErrorMessage = restErrorMessage;
     }
 
-    public RestException(CloseableHttpResponse response) {
-        StatusLine statusLine = response.getStatusLine();
-        this.statusCode   = statusLine.getStatusCode();
-        this.reasonPhrase = statusLine.getReasonPhrase();
+    private static ErrorBean getErrorBean(CloseableHttpResponse response) {
+        ErrorBean err = new ErrorBean();
         try (response) {
             InputStream inputStream = response.getEntity().getContent();
             if (inputStream != null) {
                 InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
                 try (JsonReader jsonReader = new JsonReader(reader)) {
                     jsonReader.setLenient(true);
-                    restErrorMessage = new Gson().fromJson(jsonReader, ErrorBean.class);
+                    return new Gson().fromJson(jsonReader, ErrorBean.class);
                 }
             }
+            err.addMessage("could not get stream while trying to get error");
         } catch (IOException e) {
             // nothing to say
+            err.addMessage("error while trying to get error: " + e.getMessage());
         }
+        return err;
     }
 
     public int getStatusCode() {

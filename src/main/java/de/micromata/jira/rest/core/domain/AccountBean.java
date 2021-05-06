@@ -2,7 +2,7 @@ package de.micromata.jira.rest.core.domain;
 
 import com.google.gson.annotations.Expose;
 
-public class AuthorBean extends UserBean {
+public class AccountBean extends UserBean {
     @Expose
     private String         accountId;
     @Expose

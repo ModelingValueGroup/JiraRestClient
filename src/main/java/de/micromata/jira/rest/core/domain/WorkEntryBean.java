@@ -6,11 +6,11 @@ import com.google.gson.annotations.Expose;
 
 public class WorkEntryBean extends BaseBean {
     @Expose
-    private AuthorBean author;
+    private AccountBean author;
     @Expose
-    private AuthorBean updateAuthor;
+    private AccountBean updateAuthor;
     @Expose
-    private String     created;
+    private String      created;
     @Expose
     private String     updated;
     @Expose
@@ -24,19 +24,19 @@ public class WorkEntryBean extends BaseBean {
     @Expose
     private String     comment;
 
-    public AuthorBean getAuthor() {
+    public AccountBean getAuthor() {
         return author;
     }
 
-    public void setAuthor(AuthorBean author) {
+    public void setAuthor(AccountBean author) {
         this.author = author;
     }
 
-    public AuthorBean getUpdateAuthor() {
+    public AccountBean getUpdateAuthor() {
         return updateAuthor;
     }
 
-    public void setUpdateAuthor(AuthorBean updateAuthor) {
+    public void setUpdateAuthor(AccountBean updateAuthor) {
         this.updateAuthor = updateAuthor;
     }
 
