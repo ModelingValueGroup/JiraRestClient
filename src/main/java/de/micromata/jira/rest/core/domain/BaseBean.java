@@ -1,11 +1,12 @@
 package de.micromata.jira.rest.core.domain;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.Objects;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
@@ -77,23 +78,24 @@ public class BaseBean implements Comparable<BaseBean> {
     }
 
     private String getKey() {
-        return name+"::"+self;
+        return name + "::" + self;
     }
 
     @Override
     public String toString() {
-        Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-        return gson.toJson(this);
+        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create().toJson(this);
     }
 
-    private static final DateTimeFormatter JIRA_DATE_TIME_FORMAT = new DateTimeFormatterBuilder().parseCaseInsensitive()
-            .append(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-            .parseLenient()
-            .appendOffset("+HHmm", "")
-            .parseStrict()
-            .toFormatter();
+    private static final DateTimeFormatter JIRA_DATE_TIME_FORMAT =
+            new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive()
+                    .append(DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+                    .parseLenient()
+                    .appendOffset("+HHmm", "")
+                    .parseStrict()
+                    .toFormatter();
 
     protected static LocalDateTime toDate(String s) {
-        return LocalDateTime.parse(s, JIRA_DATE_TIME_FORMAT);
+        return ZonedDateTime.parse(s, JIRA_DATE_TIME_FORMAT).withZoneSameInstant(ZoneId.systemDefault()).toLocalDateTime();
     }
 }

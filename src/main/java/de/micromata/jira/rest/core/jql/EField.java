@@ -343,6 +343,8 @@ public enum EField {
      */
     UPDATED("updated", EFieldType.DATE),
 
+    WORKLOG_DATE("worklogDate", EFieldType.DATE),
+
     /**
      * Issues for which a particular user has voted.
      * <p>Examples:
