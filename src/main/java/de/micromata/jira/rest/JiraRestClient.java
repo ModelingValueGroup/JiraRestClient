@@ -11,6 +11,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -56,31 +57,23 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
     private static final Map<String, FieldBean> customfields = new HashMap<>();
     private static       RequestConfig          requestConfig;
 
-    private final ExecutorService     executorService;
-    //
-    private       String              username;
-    private       String              password;
-    private       URI                 uri;
-    private       HttpHost            proxyHost;
-    //
-    private       URI                 baseUri;
-    private       CloseableHttpClient httpclient;
+    protected final ExecutorService     executorService;
+    private         URI                 baseUri;
+    private         String              username    = StringUtils.EMPTY;
+    private         CloseableHttpClient httpclient;
+    private         HttpHost            proxyHost;
     @SuppressWarnings("unused")
-    private final CookieStore         cookieStore = new BasicCookieStore();
-    private       HttpClientContext   clientContext;
+    private final   CookieStore         cookieStore = new BasicCookieStore();
+    private         HttpClientContext   clientContext;
     //
-    private       IssueClient         issueClient;
-    private       UserClient          userClient;
-    private       SearchClient        searchClient;
-    private       ProjectClient       projectClient;
-    private       SystemClient        systemClient;
+    private         IssueClient         issueClient;
+    private         UserClient          userClient;
+    private         SearchClient        searchClient;
+    private         ProjectClient       projectClient;
+    private         SystemClient        systemClient;
 
     public JiraRestClient(ExecutorService executorService) {
         this.executorService = executorService;
-    }
-
-    public int reconnect() throws IOException, URISyntaxException, ExecutionException, InterruptedException {
-        return connect(uri, username, password, proxyHost);
     }
 
     public int connect(URI uri, String username, String password) throws IOException, URISyntaxException, ExecutionException, InterruptedException {
@@ -97,9 +90,6 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
      */
     public int connect(URI uri, String username, String password, HttpHost proxyHost) throws IOException, URISyntaxException, ExecutionException, InterruptedException {
         this.username = username;
-        this.password = password;
-        this.uri      = uri;
-
         String host   = uri.getHost();
         int    port   = getPort(uri.toURL());
         String scheme = HTTP;
@@ -128,7 +118,7 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
         // setzen des Proxies
         if (proxyHost != null) {
             this.proxyHost = proxyHost;
-            requestConfig  = RequestConfig.custom().setProxy(proxyHost).build();
+            requestConfig = RequestConfig.custom().setProxy(proxyHost).build();
         }
 
         URIBuilder            uriBuilder = URIHelper.buildPath(baseUri, MYSELF);
@@ -138,7 +128,7 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
         if (statusCode == 200) {
             // Get the Cache for the CustomFields, need to deserialize the customFields in Issue Json
             CompletableFuture<List<FieldBean>> allCustomFields = getSystemClient().getAllCustomFields();
-            List<FieldBean>                    fieldBeans      = allCustomFields.get();
+            List<FieldBean>                    fieldBeans       = allCustomFields.get();
             for (FieldBean fieldBean : fieldBeans) {
                 customfields.put(fieldBean.getId(), fieldBean);
             }

@@ -4,7 +4,6 @@ import java.io.FilterInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.InterruptedIOException;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -136,18 +135,8 @@ public abstract class BaseClient {
         return CompletableFuture.supplyAsync(() -> {
             try {
                 return f.call();
-            } catch (InterruptedIOException e) {
-                System.err.println("re-submitting after InterruptedIOException on " + jiraRestClient.getBaseUri());
-                try {
-                    Thread.sleep(10000);
-                    jiraRestClient.reconnect();
-                    Thread.sleep(10000);
-                    return f.call();
-                } catch (Exception exception) {
-                    throw new Error("problem during re-submit() to " + jiraRestClient.getBaseUri(), e);
-                }
             } catch (Exception e) {
-                throw new Error("problem during submit() to " + jiraRestClient.getBaseUri(), e);
+                throw new Error("WRAPPED", e);
             }
         }, jiraRestClient.getExecutorService());
     }
