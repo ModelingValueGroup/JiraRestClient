@@ -45,6 +45,7 @@ import de.micromata.jira.rest.core.misc.RestParamConstants;
 import de.micromata.jira.rest.core.util.ClosableHttpResponseProxy;
 import de.micromata.jira.rest.core.util.HttpMethodFactory;
 import de.micromata.jira.rest.core.util.URIHelper;
+import de.micromata.jira.rest.core.util.Wrapper;
 
 /**
  * Author: Christian Date: 09.12.2014.
@@ -136,7 +137,7 @@ public abstract class BaseClient {
             try {
                 return f.call();
             } catch (Exception e) {
-                throw new Error("WRAPPED", e);
+                throw new Wrapper("call to JIRA server " + jiraRestClient.getBaseUri() + " failed: " + e.getMessage(), e);
             }
         }, jiraRestClient.getExecutorService());
     }
