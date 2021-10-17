@@ -15,8 +15,8 @@
 
 package de.micromata.jira.rest.core.util;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.text.*;
+import java.util.*;
 
 /**
  * @author Christian Schulze

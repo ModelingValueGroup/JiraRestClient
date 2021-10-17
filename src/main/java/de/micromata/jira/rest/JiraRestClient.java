@@ -1,50 +1,27 @@
 package de.micromata.jira.rest;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpHost;
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.AuthCache;
+import org.apache.commons.lang3.*;
+import org.apache.http.*;
+import org.apache.http.auth.*;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.impl.auth.BasicScheme;
-import org.apache.http.impl.client.BasicAuthCache;
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.http.client.*;
+import org.apache.http.client.config.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.client.protocol.*;
+import org.apache.http.client.utils.*;
+import org.apache.http.impl.auth.*;
+import org.apache.http.impl.client.*;
 
-import de.micromata.jira.rest.client.IssueClient;
-import de.micromata.jira.rest.client.ProjectClient;
-import de.micromata.jira.rest.client.SearchClient;
-import de.micromata.jira.rest.client.SystemClient;
-import de.micromata.jira.rest.client.UserClient;
-import de.micromata.jira.rest.core.IssueClientImpl;
-import de.micromata.jira.rest.core.ProjectClientImpl;
-import de.micromata.jira.rest.core.SearchClientImpl;
-import de.micromata.jira.rest.core.SystemClientImpl;
-import de.micromata.jira.rest.core.UserClientImpl;
-import de.micromata.jira.rest.core.domain.field.FieldBean;
-import de.micromata.jira.rest.core.misc.RestParamConstants;
-import de.micromata.jira.rest.core.misc.RestPathConstants;
-import de.micromata.jira.rest.core.util.HttpMethodFactory;
-import de.micromata.jira.rest.core.util.URIHelper;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
+
+import de.micromata.jira.rest.client.*;
+import de.micromata.jira.rest.core.*;
+import de.micromata.jira.rest.core.domain.field.*;
+import de.micromata.jira.rest.core.misc.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * User: Christian Schulze
@@ -52,13 +29,15 @@ import de.micromata.jira.rest.core.util.URIHelper;
  * Date: 22.08.2014
  */
 public class JiraRestClient implements RestParamConstants, RestPathConstants {
-    private static final String                 HTTP         = "http";
-    private static final String                 HTTPS        = "https";
-    private static final Map<String, FieldBean> customfields = new HashMap<>();
+    private static final String                 HTTP              = "http";
+    private static final String                 HTTPS             = "https";
+    private static final Map<String, FieldBean> CUSTOM_FIELDS_MAP = new HashMap<>();
     private static       RequestConfig          requestConfig;
 
     protected final ExecutorService     executorService;
-    private         URI                 baseUri;
+    private         URI                 serverUri;
+    private         URI                 baseUriV2;
+    private         URI                 baseUriV3;
     private         String              username    = StringUtils.EMPTY;
     private         CloseableHttpClient httpclient;
     private         HttpHost            proxyHost;
@@ -89,7 +68,8 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
      * @return 200 succees, 401 for wrong credentials and 403 for captcha is needed, you have to login at the jira website
      */
     public int connect(URI uri, String username, String password, HttpHost proxyHost) throws IOException, URISyntaxException, ExecutionException, InterruptedException {
-        this.username = username;
+        this.serverUri = uri;
+        this.username  = username;
         String host   = uri.getHost();
         int    port   = getPort(uri.toURL());
         String scheme = HTTP;
@@ -113,36 +93,40 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
         // Add AuthCache to the execution context
         clientContext = HttpClientContext.create();
         clientContext.setAuthCache(authCache);
-        this.baseUri = buildBaseURI(uri);
+        this.baseUriV2 = buildBaseURIV2(uri);
+        this.baseUriV3 = buildBaseURIV3(uri);
 
         // setzen des Proxies
         if (proxyHost != null) {
             this.proxyHost = proxyHost;
-            requestConfig = RequestConfig.custom().setProxy(proxyHost).build();
+            requestConfig  = RequestConfig.custom().setProxy(proxyHost).build();
         }
 
-        URIBuilder            uriBuilder = URIHelper.buildPath(baseUri, MYSELF);
-        HttpGet               method     = HttpMethodFactory.createGetMethod(uriBuilder.build());
+        HttpGet               method     = HttpMethodFactory.createGetMethod(URIHelper.buildPath(baseUriV2, MYSELF).build());
         CloseableHttpResponse response   = httpclient.execute(method, clientContext);
         int                   statusCode = response.getStatusLine().getStatusCode();
         if (statusCode == 200) {
             // Get the Cache for the CustomFields, need to deserialize the customFields in Issue Json
             CompletableFuture<List<FieldBean>> allCustomFields = getSystemClient().getAllCustomFields();
-            List<FieldBean>                    fieldBeans       = allCustomFields.get();
+            List<FieldBean>                    fieldBeans      = allCustomFields.get();
             for (FieldBean fieldBean : fieldBeans) {
-                customfields.put(fieldBean.getId(), fieldBean);
+                CUSTOM_FIELDS_MAP.put(fieldBean.getId(), fieldBean);
             }
         }
         response.close();
         return statusCode;
     }
 
-    public static Map<String, FieldBean> getCustomfields() {
-        return customfields;
+    public static Map<String, FieldBean> getCustomFieldsMap() {
+        return CUSTOM_FIELDS_MAP;
     }
 
     public static RequestConfig getRequestConfig() {
         return requestConfig;
+    }
+
+    public URI getServerUri() {
+        return serverUri;
     }
 
     /**
@@ -162,11 +146,15 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
         return 80;
     }
 
-    private URI buildBaseURI(URI uri) throws URISyntaxException {
-        String path = uri.getPath().replaceAll("/*$", "").concat(RestPathConstants.BASE_REST_PATH);
+    private URI buildBaseURIV2(URI uri) throws URISyntaxException {
+        String path = uri.getPath().replaceAll("/*$", "").concat(RestPathConstants.BASE_REST_PATH_V2);
         return new URIBuilder(uri).setPath(path).build();
     }
 
+    private URI buildBaseURIV3(URI uri) throws URISyntaxException {
+        String path = uri.getPath().replaceAll("/*$", "").concat(RestPathConstants.BASE_REST_PATH_V3);
+        return new URIBuilder(uri).setPath(path).build();
+    }
 
     public IssueClient getIssueClient() {
         if (issueClient == null) {
@@ -212,12 +200,21 @@ public class JiraRestClient implements RestParamConstants, RestPathConstants {
     }
 
     /**
-     * Gets the base URI.
+     * Gets the base URI for API v2 calls.
      *
      * @return the base URI
      */
-    public URI getBaseUri() {
-        return baseUri;
+    public URI getBaseUriV2() {
+        return baseUriV2;
+    }
+
+    /**
+     * Gets the base URI for API v3 calls.
+     *
+     * @return the base URI
+     */
+    public URI getBaseUriV3() {
+        return baseUriV3;
     }
 
     public String getUsername() {

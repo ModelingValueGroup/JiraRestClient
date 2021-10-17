@@ -20,59 +20,34 @@ package de.micromata.jira.rest.core.misc;
  * @author Vitali Filippow
  */
 public interface RestPathConstants {
-
     // Common Stuff for Jersey Client
-
-    String AUTHORIZATION = "Authorization";
-
-    String BASIC = "Basic";
-
+    String AUTHORIZATION     = "Authorization";
+    String BASIC             = "Basic";
     // REST Paths
-    String BASE_REST_PATH = "/rest/api/2";
-
-    String PROJECT = "/project";
-
-    String USER = "/user";
-
-    String MYSELF = "/myself";
-
-    String SEARCH = "/search";
-
-    String ISSUE = "/issue";
-
-    String COMMENT = "/comment";
-
-    String VERSIONS = "/versions";
-
-    String COMPONENTS = "/components";
-
-    String ISSUETPYES = "/issuetype";
-
-    String STATUS = "/status";
-
-    String PRIORITY = "/priority";
-
-    String TRANSITIONS = "/transitions";
-
-    String WORKLOG = "/worklog";
-
-    String ATTACHMENTS = "/attachments";
-
-    String ATTACHMENT = "/attachment";
-
-    String ASSIGNABLE = "/assignable";
-
-    String FILTER = "/filter";
-
-    String FAVORITE = "/favourite";
-
-    String FIELD = "/field";
-
-    String META = "/meta";
-
-    String CREATEMETA = "/createmeta";
-
-    String MYPERMISSIONS = "/mypermissions";
-
-    String CONFIGURATION = "/configuration";
+    String BASE_REST_PATH_V2 = "/rest/api/2";
+    String BASE_REST_PATH_V3 = "/rest/api/3";
+    String PROJECT           = "/project";
+    String USER              = "/user";
+    String USER_SEARCH       = "/user/search";
+    String MYSELF            = "/myself";
+    String SEARCH            = "/search";
+    String ISSUE             = "/issue";
+    String COMMENT           = "/comment";
+    String VERSIONS          = "/versions";
+    String COMPONENTS        = "/components";
+    String ISSUETPYES        = "/issuetype";
+    String STATUS            = "/status";
+    String PRIORITY          = "/priority";
+    String TRANSITIONS       = "/transitions";
+    String WORKLOG           = "/worklog";
+    String ATTACHMENTS       = "/attachments";
+    String ATTACHMENT        = "/attachment";
+    String ASSIGNABLE        = "/assignable";
+    String FILTER            = "/filter";
+    String FAVORITE          = "/favourite";
+    String FIELD             = "/field";
+    String META              = "/meta";
+    String CREATEMETA        = "/createmeta";
+    String MYPERMISSIONS     = "/mypermissions";
+    String CONFIGURATION     = "/configuration";
 }

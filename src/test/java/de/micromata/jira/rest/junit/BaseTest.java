@@ -1,19 +1,15 @@
 package de.micromata.jira.rest.junit;
 
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.core.jql.JqlConstants;
-import de.micromata.jira.rest.core.misc.RestPathConstants;
-import org.junit.Before;
+import org.junit.*;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.text.SimpleDateFormat;
-import java.util.Properties;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
+
+import de.micromata.jira.rest.*;
+import de.micromata.jira.rest.core.jql.*;
+import de.micromata.jira.rest.core.misc.*;
 
 /**
  * Junit-Test for JiraRestClient.
@@ -28,17 +24,17 @@ class BaseTest implements JqlConstants, RestPathConstants {
 
     static final String CONFIGFILENAME = "config.properties";
 
-    static final String URL_PARAM = "url";
-    static final String LOGIN_PARAM = "login";
+    static final String URL_PARAM      = "url";
+    static final String LOGIN_PARAM    = "login";
     static final String PASSWORD_PARAM = "password";
 
     static final String USERNAME_TO_SEARCH = "admin";
     static final String ISSUEKEY_TO_SEARCH = "DEMO-1";
-    static final String PROJECT_TO_SEARCH = "DEMO";
+    static final String PROJECT_TO_SEARCH  = "DEMO";
 
     String testSystemUrl = "http://localhost:2990/jira";
-    String login = "admin";
-    String password = "admin";
+    String login         = "admin";
+    String password      = "admin";
 
     JiraRestClient jiraRestClient;
 
@@ -53,19 +49,19 @@ class BaseTest implements JqlConstants, RestPathConstants {
     @Before
     public void connect() throws URISyntaxException, IOException, ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(100);
-//        ProxyHost proxy = new ProxyHost("proxy", 3128);
+        //        ProxyHost proxy = new ProxyHost("proxy", 3128);
         URI uri = new URI(testSystemUrl);
         jiraRestClient = new JiraRestClient(executorService);
         jiraRestClient.connect(uri, login, password);
     }
 
     private void loadConfig() throws IOException {
-        String path = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String     path   = Thread.currentThread().getContextClassLoader().getResource("").getPath();
         Properties config = new Properties();
         config.load(new FileInputStream(path + CONFIGFILENAME));
         testSystemUrl = config.getProperty(URL_PARAM);
-        login = config.getProperty(LOGIN_PARAM);
-        password = config.getProperty(PASSWORD_PARAM);
+        login         = config.getProperty(LOGIN_PARAM);
+        password      = config.getProperty(PASSWORD_PARAM);
 
     }
 }

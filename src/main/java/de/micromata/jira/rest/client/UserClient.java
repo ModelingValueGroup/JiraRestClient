@@ -1,12 +1,12 @@
 package de.micromata.jira.rest.client;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import de.micromata.jira.rest.core.domain.UserBean;
-import de.micromata.jira.rest.core.domain.permission.MyPermissionsBean;
-import de.micromata.jira.rest.core.util.RestException;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.permission.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * User: Christian Schulze
@@ -44,6 +44,13 @@ public interface UserClient {
      * @return The UserBean for the username or null if the logged in User has no permission to get another user
      */
     CompletableFuture<UserBean> getUserByUsername(String username);
+
+    /**
+     * Returns all users
+     *
+     * @return The list of all users
+     */
+    CompletableFuture<List<AccountBean>> getAllUsers(Integer startAt, Integer maxResults);
 
     /**
      * Returns the logged in remote user.

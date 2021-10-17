@@ -1,6 +1,6 @@
 package de.micromata.jira.rest.core.domain.update;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 /**
  * User: Christian Schulze
@@ -19,7 +19,7 @@ public class FieldOperation {
 
     public FieldOperation(String operation, Object value) {
         this.operation = operation;
-        this.value = value;
+        this.value     = value;
     }
 
     public Object getValue() {

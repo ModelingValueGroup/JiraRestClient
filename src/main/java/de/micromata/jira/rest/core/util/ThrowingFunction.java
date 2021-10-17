@@ -1,6 +1,6 @@
 package de.micromata.jira.rest.core.util;
 
-import java.util.function.Function;
+import java.util.function.*;
 
 public interface ThrowingFunction<T, R> {
     R apply(T t) throws Exception;

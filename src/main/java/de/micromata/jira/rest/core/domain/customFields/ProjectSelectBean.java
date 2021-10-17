@@ -1,6 +1,6 @@
 package de.micromata.jira.rest.core.domain.customFields;
 
-import de.micromata.jira.rest.core.domain.ProjectBean;
+import de.micromata.jira.rest.core.domain.*;
 
 /**
  * Created by cschulc on 22.02.16.

@@ -1,9 +1,9 @@
 package de.micromata.jira.rest.core.domain;
 
-import java.util.List;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.system.AssigneeTypeEnum;
+import com.google.gson.annotations.*;
+import de.micromata.jira.rest.core.domain.system.*;
 
 public class ProjectBean extends BaseBean {
     @Expose

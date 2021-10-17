@@ -1,13 +1,11 @@
 package de.micromata.jira.rest.client;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.*;
+import java.util.concurrent.*;
 
-import de.micromata.jira.rest.core.domain.ComponentBean;
-import de.micromata.jira.rest.core.domain.ProjectBean;
-import de.micromata.jira.rest.core.domain.VersionBean;
-import de.micromata.jira.rest.core.domain.meta.MetaBean;
-import de.micromata.jira.rest.core.util.RestException;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.meta.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * The IssueClient provides all Informations for Jira Issues

@@ -1,22 +1,13 @@
 package de.micromata.jira.rest.client;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import de.micromata.jira.rest.core.domain.AttachmentBean;
-import de.micromata.jira.rest.core.domain.CommentBean;
-import de.micromata.jira.rest.core.domain.CommentsBean;
-import de.micromata.jira.rest.core.domain.IssueBean;
-import de.micromata.jira.rest.core.domain.IssueResponse;
-import de.micromata.jira.rest.core.domain.TransitionBean;
-import de.micromata.jira.rest.core.domain.WorklogBean;
-import de.micromata.jira.rest.core.domain.update.IssueUpdate;
-import de.micromata.jira.rest.core.util.RestException;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.update.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * The IssueClient provides all Informations for Jira Issues

@@ -1,11 +1,11 @@
 package de.micromata.jira.rest.client;
 
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.*;
+import java.util.concurrent.*;
 
-import de.micromata.jira.rest.core.domain.JqlSearchResult;
-import de.micromata.jira.rest.core.domain.filter.FilterBean;
-import de.micromata.jira.rest.core.jql.JqlSearchBean;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.filter.*;
+import de.micromata.jira.rest.core.jql.*;
 
 
 /**

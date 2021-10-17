@@ -1,8 +1,8 @@
 package de.micromata.jira.rest.core.domain;
 
-import java.util.List;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 public class IssueBean extends BaseBean {
     @Expose

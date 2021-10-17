@@ -1,8 +1,8 @@
 package de.micromata.jira.rest.core.domain.permission;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.*;
 
-import de.micromata.jira.rest.core.domain.BaseBean;
+import de.micromata.jira.rest.core.domain.*;
 
 /**
  * User: Christian Schulze (c.schulze@micromata.de)

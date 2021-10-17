@@ -1,20 +1,15 @@
 package de.micromata.jira.rest.core.custom;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.lang.reflect.*;
+import java.util.*;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.core.domain.ProjectBean;
-import de.micromata.jira.rest.core.domain.UserBean;
-import de.micromata.jira.rest.core.domain.VersionBean;
-import de.micromata.jira.rest.core.domain.customFields.CustomFieldType;
-import de.micromata.jira.rest.core.domain.customFields.ValueBean;
-import de.micromata.jira.rest.core.domain.field.FieldBean;
-import de.micromata.jira.rest.core.domain.meta.custom.ValueMetaBean;
+import com.google.gson.*;
+import com.google.gson.reflect.*;
+import de.micromata.jira.rest.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.customFields.*;
+import de.micromata.jira.rest.core.domain.field.*;
+import de.micromata.jira.rest.core.domain.meta.custom.*;
 
 /**
  * Created by cschulc on 16.03.16.
@@ -40,7 +35,7 @@ public abstract class BaseDeserializer {
             .create();
 
     protected CustomFieldType getCustomFieldType(String customFieldId) {
-        FieldBean fieldBean = JiraRestClient.getCustomfields().get(customFieldId);
+        FieldBean fieldBean = JiraRestClient.getCustomFieldsMap().get(customFieldId);
         if (fieldBean == null) {
             return null;
         }

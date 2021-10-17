@@ -1,6 +1,6 @@
 package de.micromata.jira.rest.core.domain;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 /**
  * Author: Christian

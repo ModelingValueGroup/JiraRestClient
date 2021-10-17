@@ -1,8 +1,8 @@
 package de.micromata.jira.rest.core.domain;
 
-import java.time.LocalDateTime;
+import java.time.*;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 public class WorkEntryBean extends BaseBean {
     @Expose
@@ -12,17 +12,17 @@ public class WorkEntryBean extends BaseBean {
     @Expose
     private String      created;
     @Expose
-    private String     updated;
+    private String      updated;
     @Expose
-    private String     started;
+    private String      started;
     @Expose
-    private String     timeSpent;
+    private String      timeSpent;
     @Expose
-    private long       timeSpentSeconds;
+    private long        timeSpentSeconds;
     @Expose
-    private String     issueId;
+    private String      issueId;
     @Expose
-    private String     comment;
+    private String      comment;
 
     public AccountBean getAuthor() {
         return author;

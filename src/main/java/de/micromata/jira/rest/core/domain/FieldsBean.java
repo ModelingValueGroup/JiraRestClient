@@ -1,9 +1,9 @@
 package de.micromata.jira.rest.core.domain;
 
-import java.util.List;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.customFields.CustomFieldBaseBean;
+import com.google.gson.annotations.*;
+import de.micromata.jira.rest.core.domain.customFields.*;
 
 public class FieldsBean {
     @Expose

@@ -6,25 +6,15 @@ package de.micromata.jira.rest.core.misc;
  * Date: 09.08.2014
  */
 public interface RestParamConstants {
-
-
-    String USERNAME = "username";
-
-    String EXPAND = "expand";
-
+    String EXPAND             = "expand";
+    String FIELDS             = "fields";
+    String ISSUEKEY           = "issueKey";
+    String MAX_RESULTS        = "maxResults";
+    String PROJECTKEY         = "project";
+    String PROJECTKEYS        = "projectKeys";
+    String QUERY              = "query";
+    String RENDERED_FIELDS    = "renderedFields";
+    String START_AT           = "startAt";
     String TRANSITIONS_FIELDS = "transitions.fields";
-
-    String RENDERED_FIELDS = "renderedFields";
-
-    String ISSUEKEY = "issueKey";
-
-    String START_AT = "startAt";
-
-    String MAX_RESULTS = "maxResults";
-
-    String PROJECTKEY = "project";
-
-    String FIELDS = "fields";
-
-    String PROJECTKEYS = "projectKeys";
+    String USERNAME           = "username";
 }

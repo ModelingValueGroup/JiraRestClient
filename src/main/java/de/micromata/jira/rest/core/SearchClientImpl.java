@@ -1,21 +1,20 @@
 package de.micromata.jira.rest.core;
 
-import java.net.HttpURLConnection;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import org.apache.commons.lang3.*;
+import org.apache.http.client.methods.*;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.http.client.methods.CloseableHttpResponse;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import com.google.gson.stream.JsonReader;
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.client.SearchClient;
-import de.micromata.jira.rest.core.domain.JqlSearchResult;
-import de.micromata.jira.rest.core.domain.filter.FilterBean;
-import de.micromata.jira.rest.core.jql.JqlSearchBean;
-import de.micromata.jira.rest.core.misc.RestParamConstants;
-import de.micromata.jira.rest.core.misc.RestPathConstants;
-import de.micromata.jira.rest.core.util.RestException;
+import com.google.gson.stream.*;
+import de.micromata.jira.rest.*;
+import de.micromata.jira.rest.client.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.filter.*;
+import de.micromata.jira.rest.core.jql.*;
+import de.micromata.jira.rest.core.misc.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * User: Christian Schulze

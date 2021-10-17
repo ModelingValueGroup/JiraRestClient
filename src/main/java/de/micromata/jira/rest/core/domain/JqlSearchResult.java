@@ -15,12 +15,11 @@
 
 package de.micromata.jira.rest.core.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.lang3.*;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 /**
  * @author Christian Schulze

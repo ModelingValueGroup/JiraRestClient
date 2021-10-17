@@ -1,31 +1,11 @@
 package de.micromata.jira.rest.core.custom;
 
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.*;
+import java.util.*;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import de.micromata.jira.rest.core.domain.FieldsBean;
-import de.micromata.jira.rest.core.domain.IssueBean;
-import de.micromata.jira.rest.core.domain.ProjectBean;
-import de.micromata.jira.rest.core.domain.UserBean;
-import de.micromata.jira.rest.core.domain.VersionBean;
-import de.micromata.jira.rest.core.domain.customFields.CascadingValueBean;
-import de.micromata.jira.rest.core.domain.customFields.CustomFieldBaseBean;
-import de.micromata.jira.rest.core.domain.customFields.CustomFieldType;
-import de.micromata.jira.rest.core.domain.customFields.GroupSelectBean;
-import de.micromata.jira.rest.core.domain.customFields.MultiValueBean;
-import de.micromata.jira.rest.core.domain.customFields.ProjectSelectBean;
-import de.micromata.jira.rest.core.domain.customFields.SingleValueBean;
-import de.micromata.jira.rest.core.domain.customFields.UserSelectBean;
-import de.micromata.jira.rest.core.domain.customFields.ValueBean;
-import de.micromata.jira.rest.core.domain.customFields.VersionSelectBean;
+import com.google.gson.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.customFields.*;
 
 /**
  * Created by cschulc on 18.02.16.

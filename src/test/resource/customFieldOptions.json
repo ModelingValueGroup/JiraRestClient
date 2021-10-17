@@ -1,4 +1,5 @@
-{"expand": "projects",
+{
+  "expand": "projects",
   "projects": [
     {
       "expand": "issuetypes",

@@ -1,10 +1,9 @@
 package de.micromata.jira.rest.core.domain.filter;
 
-import java.util.List;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.BaseBean;
-import de.micromata.jira.rest.core.domain.UserBean;
+import com.google.gson.annotations.*;
+import de.micromata.jira.rest.core.domain.*;
 
 public class FilterBean extends BaseBean {
 

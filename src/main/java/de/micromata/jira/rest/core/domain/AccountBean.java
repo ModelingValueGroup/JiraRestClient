@@ -1,12 +1,12 @@
 package de.micromata.jira.rest.core.domain;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 public class AccountBean extends UserBean {
     @Expose
-    private String         accountId;
+    private String accountId;
     @Expose
-    private String         accountType;
+    private String accountType;
 
     public String getAccountId() {
         return accountId;

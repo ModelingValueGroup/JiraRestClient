@@ -1,6 +1,6 @@
 package de.micromata.jira.rest.core.domain;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 public class UserBean extends BaseBean {
     @Expose
@@ -52,5 +52,10 @@ public class UserBean extends BaseBean {
 
     public void setTimeZone(String timeZone) {
         this.timeZone = timeZone;
+    }
+
+    @Override
+    public String toString() {
+        return displayName;
     }
 }

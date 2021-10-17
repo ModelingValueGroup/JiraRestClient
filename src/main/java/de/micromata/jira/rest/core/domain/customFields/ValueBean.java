@@ -1,7 +1,7 @@
 package de.micromata.jira.rest.core.domain.customFields;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.BaseBean;
+import com.google.gson.annotations.*;
+import de.micromata.jira.rest.core.domain.*;
 
 /**
  * Created by cschulc on 22.02.16.

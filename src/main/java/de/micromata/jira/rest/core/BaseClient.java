@@ -1,51 +1,28 @@
 package de.micromata.jira.rest.core;
 
-import java.io.FilterInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
+import org.apache.commons.lang3.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.client.protocol.*;
+import org.apache.http.client.utils.*;
 
-import org.apache.commons.lang3.Validate;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.client.utils.URIBuilder;
+import java.io.*;
+import java.lang.reflect.*;
+import java.net.*;
+import java.nio.charset.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.core.custom.IssueBeanDeserializer;
-import de.micromata.jira.rest.core.custom.MetaBeanDeserializer;
-import de.micromata.jira.rest.core.domain.AttachmentBean;
-import de.micromata.jira.rest.core.domain.ComponentBean;
-import de.micromata.jira.rest.core.domain.IssueBean;
-import de.micromata.jira.rest.core.domain.IssuetypeBean;
-import de.micromata.jira.rest.core.domain.PriorityBean;
-import de.micromata.jira.rest.core.domain.ProjectBean;
-import de.micromata.jira.rest.core.domain.StatusBean;
-import de.micromata.jira.rest.core.domain.UserBean;
-import de.micromata.jira.rest.core.domain.VersionBean;
-import de.micromata.jira.rest.core.domain.field.FieldBean;
-import de.micromata.jira.rest.core.domain.filter.FilterBean;
-import de.micromata.jira.rest.core.domain.meta.MetaBean;
-import de.micromata.jira.rest.core.misc.RestParamConstants;
-import de.micromata.jira.rest.core.util.ClosableHttpResponseProxy;
-import de.micromata.jira.rest.core.util.HttpMethodFactory;
-import de.micromata.jira.rest.core.util.URIHelper;
-import de.micromata.jira.rest.core.util.Wrapper;
+import com.google.gson.*;
+import com.google.gson.reflect.*;
+import com.google.gson.stream.*;
+import de.micromata.jira.rest.*;
+import de.micromata.jira.rest.core.custom.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.field.*;
+import de.micromata.jira.rest.core.domain.filter.*;
+import de.micromata.jira.rest.core.domain.meta.*;
+import de.micromata.jira.rest.core.misc.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * Author: Christian Date: 09.12.2014.
@@ -74,6 +51,8 @@ public abstract class BaseClient {
     }.getType();
     public static final Type LIST_OF_USER       = new TypeToken<ArrayList<UserBean>>() {
     }.getType();
+    public static final Type LIST_OF_ACCOUNT    = new TypeToken<ArrayList<AccountBean>>() {
+    }.getType();
 
     private final   JiraRestClient jiraRestClient;
     protected final Gson           gson = new GsonBuilder()
@@ -94,8 +73,12 @@ public abstract class BaseClient {
         return jsonReader;
     }
 
-    protected URIBuilder buildPath(String... paths) {
-        return URIHelper.buildPath(jiraRestClient.getBaseUri(), paths);
+    protected URIBuilder buildPathV2(String... paths) {
+        return URIHelper.buildPath(jiraRestClient.getBaseUriV2(), paths);
+    }
+
+    protected URIBuilder buildPathV3(String... paths) {
+        return URIHelper.buildPath(jiraRestClient.getBaseUriV3(), paths);
     }
 
     protected JsonReader getJsonReader(CloseableHttpResponse response) throws IOException {
@@ -137,7 +120,7 @@ public abstract class BaseClient {
             try {
                 return f.call();
             } catch (Exception e) {
-                throw new Wrapper("call to JIRA server " + jiraRestClient.getBaseUri() + " failed: " + e.getMessage(), e);
+                throw new Wrapper("call to JIRA server " + jiraRestClient.getServerUri() + " failed: " + e.getMessage(), e);
             }
         }, jiraRestClient.getExecutorService());
     }
@@ -152,7 +135,7 @@ public abstract class BaseClient {
     }
 
     protected CloseableHttpResponse executeGet(List<String> fields, List<String> expand, String... apiPath) throws IOException, URISyntaxException {
-        URIBuilder uriBuilder = buildPath(apiPath);
+        URIBuilder uriBuilder = buildPathV2(apiPath);
         if (fields != null && !fields.isEmpty()) {
             uriBuilder.addParameter(RestParamConstants.FIELDS, String.join(SEPARATOR, fields));
         }
@@ -180,7 +163,7 @@ public abstract class BaseClient {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     protected CloseableHttpResponse executePost(Object body, String... apiPath) throws IOException, URISyntaxException {
-        return executePost(body, buildPath(apiPath));
+        return executePost(body, buildPathV2(apiPath));
     }
 
     protected CloseableHttpResponse executePost(Object body, URIBuilder uriBuilder) throws IOException, URISyntaxException {
@@ -192,7 +175,7 @@ public abstract class BaseClient {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     protected CloseableHttpResponse executePut(Object body, String... apiPath) throws IOException, URISyntaxException {
-        return executePut(body, buildPath(apiPath));
+        return executePut(body, buildPathV2(apiPath));
     }
 
     protected CloseableHttpResponse executePut(Object body, URIBuilder uriBuilder) throws IOException, URISyntaxException {

@@ -15,10 +15,9 @@
 
 package de.micromata.jira.rest.core.jql;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 /**
  * JQL search requirements.

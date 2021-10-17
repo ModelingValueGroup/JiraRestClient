@@ -1,23 +1,20 @@
 package de.micromata.jira.rest.core;
 
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import org.apache.commons.lang3.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.client.utils.*;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.Validate;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.utils.URIBuilder;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import com.google.gson.stream.JsonReader;
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.client.UserClient;
-import de.micromata.jira.rest.core.domain.UserBean;
-import de.micromata.jira.rest.core.domain.permission.MyPermissionsBean;
-import de.micromata.jira.rest.core.misc.RestParamConstants;
-import de.micromata.jira.rest.core.misc.RestPathConstants;
-import de.micromata.jira.rest.core.util.RestException;
+import com.google.gson.stream.*;
+import de.micromata.jira.rest.*;
+import de.micromata.jira.rest.client.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.permission.*;
+import de.micromata.jira.rest.core.misc.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * User: Christian Schulze
@@ -40,13 +37,38 @@ public class UserClientImpl extends BaseClient implements UserClient, RestPathCo
     public CompletableFuture<UserBean> getUserByUsername(final String username) {
         Validate.notNull(username);
         return submit(() -> {
-            URIBuilder uriBuilder = buildPath(USER);
+            URIBuilder uriBuilder = buildPathV2(USER);
             uriBuilder.addParameter(USERNAME, username);
             try (CloseableHttpResponse response = executeGet(uriBuilder)) {
                 int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == HttpURLConnection.HTTP_OK) {
                     try (JsonReader jsonReader = getJsonReader(response)) {
                         return gson.fromJson(jsonReader, UserBean.class);
+                    }
+                } else if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
+                    return null;
+                } else {
+                    throw new RestException(response);
+                }
+            }
+        });
+    }
+
+    public CompletableFuture<List<AccountBean>> getAllUsers(final Integer startAt, final Integer maxResults) {
+        return submit(() -> {
+            URIBuilder uriBuilder = buildPathV3(USER_SEARCH);
+            uriBuilder.addParameter(QUERY, "");
+            if (startAt != null && startAt >= 0) {
+                uriBuilder.addParameter(START_AT, startAt.toString());
+            }
+            if (maxResults != null && maxResults > 0 && maxResults < 1000) {
+                uriBuilder.addParameter(MAX_RESULTS, maxResults.toString());
+            }
+            try (CloseableHttpResponse response = executeGet(uriBuilder)) {
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == HttpURLConnection.HTTP_OK) {
+                    try (JsonReader jsonReader = getJsonReader(response)) {
+                        return gson.fromJson(jsonReader, LIST_OF_ACCOUNT);
                     }
                 } else if (statusCode == HttpURLConnection.HTTP_UNAUTHORIZED || statusCode == HttpURLConnection.HTTP_FORBIDDEN) {
                     return null;
@@ -80,7 +102,7 @@ public class UserClientImpl extends BaseClient implements UserClient, RestPathCo
     private CompletableFuture<List<UserBean>> getAssignableSearch(@SuppressWarnings("SameParameterValue") final String username, final String issueKey, final String projectKey, final Integer startAt, final Integer maxResults) {
         return submit(() -> {
 
-            URIBuilder uriBuilder = buildPath(USER, ASSIGNABLE, SEARCH);
+            URIBuilder uriBuilder = buildPathV2(USER, ASSIGNABLE, SEARCH);
             if (StringUtils.trimToNull(username) != null) {
                 uriBuilder.addParameter(USERNAME, username);
             }

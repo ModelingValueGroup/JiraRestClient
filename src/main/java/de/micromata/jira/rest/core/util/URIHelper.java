@@ -15,11 +15,10 @@
 
 package de.micromata.jira.rest.core.util;
 
-import java.net.URI;
-import java.net.URISyntaxException;
+import org.apache.commons.validator.routines.*;
+import org.apache.http.client.utils.*;
 
-import org.apache.commons.validator.routines.UrlValidator;
-import org.apache.http.client.utils.URIBuilder;
+import java.net.*;
 
 /**
  * @author Christian Schulze

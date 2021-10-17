@@ -1,14 +1,11 @@
 package de.micromata.jira.rest.core.domain;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Objects;
+import java.time.*;
+import java.time.format.*;
+import java.util.*;
 
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
+import com.google.gson.*;
+import com.google.gson.annotations.*;
 
 /**
  * Author: Christian

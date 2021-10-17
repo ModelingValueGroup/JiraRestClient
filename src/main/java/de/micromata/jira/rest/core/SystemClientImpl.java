@@ -1,25 +1,19 @@
 package de.micromata.jira.rest.core;
 
-import java.net.HttpURLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import org.apache.http.client.methods.*;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import com.google.gson.stream.JsonReader;
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.client.SystemClient;
-import de.micromata.jira.rest.core.domain.AttachmentMetaBean;
-import de.micromata.jira.rest.core.domain.IssuetypeBean;
-import de.micromata.jira.rest.core.domain.PriorityBean;
-import de.micromata.jira.rest.core.domain.StatusBean;
-import de.micromata.jira.rest.core.domain.field.CreateFieldBean;
-import de.micromata.jira.rest.core.domain.field.FieldBean;
-import de.micromata.jira.rest.core.domain.system.ConfigurationBean;
-import de.micromata.jira.rest.core.misc.RestParamConstants;
-import de.micromata.jira.rest.core.misc.RestPathConstants;
-import de.micromata.jira.rest.core.util.RestException;
+import com.google.gson.stream.*;
+import de.micromata.jira.rest.*;
+import de.micromata.jira.rest.client.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.field.*;
+import de.micromata.jira.rest.core.domain.system.*;
+import de.micromata.jira.rest.core.misc.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * User: Christian Schulze
@@ -111,9 +105,9 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
 
     public CompletableFuture<List<FieldBean>> getAllCustomFields() {
         return submit(() -> {
-            List<FieldBean>         retval    = new ArrayList<>();
+            List<FieldBean>                    retval    = new ArrayList<>();
             CompletableFuture<List<FieldBean>> allFields = getAllFields();
-            List<FieldBean>         fieldBeen = allFields.get();
+            List<FieldBean>                    fieldBeen = allFields.get();
             for (FieldBean fieldBean : fieldBeen) {
                 if (fieldBean.isCustom()) {
                     retval.add(fieldBean);
@@ -126,7 +120,7 @@ public class SystemClientImpl extends BaseClient implements SystemClient, RestPa
     public CompletableFuture<FieldBean> getCustomFieldById(final String id) {
         return submit(() -> {
             CompletableFuture<List<FieldBean>> allFields = getAllFields();
-            List<FieldBean>         fieldBeen = allFields.get();
+            List<FieldBean>                    fieldBeen = allFields.get();
             for (FieldBean fieldBean : fieldBeen) {
                 if (!fieldBean.isCustom()) {
                     continue;

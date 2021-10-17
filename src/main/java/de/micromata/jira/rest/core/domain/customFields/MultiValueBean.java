@@ -1,7 +1,6 @@
 package de.micromata.jira.rest.core.domain.customFields;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by cschulc on 22.02.16.

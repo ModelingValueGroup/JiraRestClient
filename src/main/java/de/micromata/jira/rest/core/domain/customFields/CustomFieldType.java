@@ -32,7 +32,7 @@ public enum CustomFieldType {
     UNKNOWN("unknown.custom.field.type", false);
 
     CustomFieldType(String jiraName, boolean hasAllowedValues) {
-        this.jiraName = jiraName;
+        this.jiraName         = jiraName;
         this.hasAllowedValues = hasAllowedValues;
     }
 

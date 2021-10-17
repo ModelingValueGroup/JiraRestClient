@@ -1,17 +1,13 @@
 package de.micromata.jira.rest.client;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import de.micromata.jira.rest.core.domain.AttachmentMetaBean;
-import de.micromata.jira.rest.core.domain.IssuetypeBean;
-import de.micromata.jira.rest.core.domain.PriorityBean;
-import de.micromata.jira.rest.core.domain.StatusBean;
-import de.micromata.jira.rest.core.domain.field.CreateFieldBean;
-import de.micromata.jira.rest.core.domain.field.FieldBean;
-import de.micromata.jira.rest.core.domain.system.ConfigurationBean;
-import de.micromata.jira.rest.core.util.RestException;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.field.*;
+import de.micromata.jira.rest.core.domain.system.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * The SystemClient provides all Information about the Jira System Configuration

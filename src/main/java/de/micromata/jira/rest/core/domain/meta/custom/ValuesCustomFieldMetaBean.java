@@ -1,9 +1,8 @@
 package de.micromata.jira.rest.core.domain.meta.custom;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import de.micromata.jira.rest.core.domain.meta.fields.FieldMetaBean;
+import de.micromata.jira.rest.core.domain.meta.fields.*;
 
 /**
  * Created by cschulc on 16.03.16.

@@ -1,21 +1,18 @@
 package de.micromata.jira.rest.core.util;
 
-import java.net.URI;
-
-import javax.ws.rs.core.MediaType;
-
-import org.apache.commons.codec.CharEncoding;
+import org.apache.commons.codec.*;
 import org.apache.http.HttpHeaders;
-import org.apache.http.HttpMessage;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.message.BasicHeader;
+import org.apache.http.*;
+import org.apache.http.client.config.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.entity.*;
+import org.apache.http.message.*;
 
-import de.micromata.jira.rest.JiraRestClient;
+import java.net.*;
+
+import javax.ws.rs.core.*;
+
+import de.micromata.jira.rest.*;
 
 /**
  * User: Christian Schulze

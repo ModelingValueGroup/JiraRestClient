@@ -15,16 +15,14 @@
 
 package de.micromata.jira.rest.core.util;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
+import org.apache.http.client.methods.*;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
+import java.io.*;
+import java.nio.charset.*;
 
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-import de.micromata.jira.rest.core.domain.ErrorBean;
+import com.google.gson.*;
+import com.google.gson.stream.*;
+import de.micromata.jira.rest.core.domain.*;
 
 /**
  * @author Christian Schulze

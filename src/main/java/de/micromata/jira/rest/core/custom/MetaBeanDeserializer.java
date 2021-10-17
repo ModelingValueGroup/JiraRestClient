@@ -1,35 +1,20 @@
 package de.micromata.jira.rest.core.custom;
 
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.lang.reflect.*;
+import java.util.*;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import de.micromata.jira.rest.core.domain.ProjectBean;
-import de.micromata.jira.rest.core.domain.VersionBean;
-import de.micromata.jira.rest.core.domain.customFields.CustomFieldType;
-import de.micromata.jira.rest.core.domain.meta.FieldsMetaBean;
-import de.micromata.jira.rest.core.domain.meta.IssueTypeMetaBean;
-import de.micromata.jira.rest.core.domain.meta.MetaBean;
-import de.micromata.jira.rest.core.domain.meta.ProjectMetaBean;
-import de.micromata.jira.rest.core.domain.meta.custom.ProjectCustomFieldMetaBean;
-import de.micromata.jira.rest.core.domain.meta.custom.ValueMetaBean;
-import de.micromata.jira.rest.core.domain.meta.custom.ValuesCustomFieldMetaBean;
-import de.micromata.jira.rest.core.domain.meta.custom.VersionCustomFieldMetaBean;
-import de.micromata.jira.rest.core.domain.meta.fields.FieldMetaBean;
+import com.google.gson.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.customFields.*;
+import de.micromata.jira.rest.core.domain.meta.*;
+import de.micromata.jira.rest.core.domain.meta.custom.*;
+import de.micromata.jira.rest.core.domain.meta.fields.*;
 
 /**
  * Created by cschulc on 16.03.16.
  */
 public class MetaBeanDeserializer extends BaseDeserializer implements JsonDeserializer<MetaBean> {
-    public static final String ALLOWED_VALUES     = "allowedValues";
+    public static final String ALLOWED_VALUES = "allowedValues";
 
     private final Map<String, FieldMetaBean> customFieldsMetaBeanCache = new HashMap<>();
 

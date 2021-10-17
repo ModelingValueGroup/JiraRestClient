@@ -1,16 +1,10 @@
 package de.micromata.jira.rest.core.util;
 
-import java.util.Locale;
+import org.apache.http.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.params.*;
 
-import org.apache.http.Header;
-import org.apache.http.HeaderIterator;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.ProtocolVersion;
-import org.apache.http.StatusLine;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.params.HttpParams;
+import java.util.*;
 
 @SuppressWarnings("deprecation")
 public class ClosableHttpResponseProxy implements CloseableHttpResponse {
@@ -19,7 +13,7 @@ public class ClosableHttpResponseProxy implements CloseableHttpResponse {
 
     public ClosableHttpResponseProxy(final HttpResponse original, final HttpRequestBase method) {
         this.original = original;
-        this.method = method;
+        this.method   = method;
     }
 
     public HttpRequestBase getMethod() {

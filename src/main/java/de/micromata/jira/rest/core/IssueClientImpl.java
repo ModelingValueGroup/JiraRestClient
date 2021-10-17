@@ -1,43 +1,27 @@
 package de.micromata.jira.rest.core;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import org.apache.commons.io.*;
+import org.apache.commons.lang3.*;
+import org.apache.http.*;
+import org.apache.http.client.methods.*;
+import org.apache.http.client.utils.*;
+import org.apache.http.entity.*;
+import org.apache.http.entity.mime.*;
+import org.apache.http.entity.mime.content.*;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.Validate;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URIBuilder;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
+import java.io.*;
+import java.net.*;
+import java.util.*;
+import java.util.concurrent.*;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.stream.JsonReader;
-import de.micromata.jira.rest.JiraRestClient;
-import de.micromata.jira.rest.client.IssueClient;
-import de.micromata.jira.rest.core.domain.AttachmentBean;
-import de.micromata.jira.rest.core.domain.CommentBean;
-import de.micromata.jira.rest.core.domain.CommentsBean;
-import de.micromata.jira.rest.core.domain.ErrorBean;
-import de.micromata.jira.rest.core.domain.IssueBean;
-import de.micromata.jira.rest.core.domain.IssueResponse;
-import de.micromata.jira.rest.core.domain.TransitionBean;
-import de.micromata.jira.rest.core.domain.WorklogBean;
-import de.micromata.jira.rest.core.domain.update.IssueUpdate;
-import de.micromata.jira.rest.core.misc.JsonConstants;
-import de.micromata.jira.rest.core.misc.RestParamConstants;
-import de.micromata.jira.rest.core.misc.RestPathConstants;
-import de.micromata.jira.rest.core.util.RestException;
+import com.google.gson.*;
+import com.google.gson.stream.*;
+import de.micromata.jira.rest.*;
+import de.micromata.jira.rest.client.*;
+import de.micromata.jira.rest.core.domain.*;
+import de.micromata.jira.rest.core.domain.update.*;
+import de.micromata.jira.rest.core.misc.*;
+import de.micromata.jira.rest.core.util.*;
 
 /**
  * User: Christian Date: ${Date}
@@ -194,7 +178,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
 
     public CompletableFuture<List<AttachmentBean>> saveAttachmentToIssue(String issuekey, File... files) {
         return submit(() -> {
-            URIBuilder uriBuilder = buildPath(ISSUE, issuekey, ATTACHMENTS);
+            URIBuilder uriBuilder = buildPathV2(ISSUE, issuekey, ATTACHMENTS);
             HttpPost   postMethod = new HttpPost(uriBuilder.build());
             postMethod.setHeader("X-Atlassian-Token", "no-check");
             MultipartEntityBuilder multipartEntityBuilder = MultipartEntityBuilder.create();
@@ -256,7 +240,7 @@ public class IssueClientImpl extends BaseClient implements IssueClient, RestPara
     public CompletableFuture<List<TransitionBean>> getIssueTransitionsByKey(final String issueKey) {
         Validate.notNull(issueKey);
         return submit(() -> {
-            URIBuilder uriBuilder = buildPath(ISSUE, issueKey, TRANSITIONS).addParameter(EXPAND, TRANSITIONS_FIELDS);
+            URIBuilder uriBuilder = buildPathV2(ISSUE, issueKey, TRANSITIONS).addParameter(EXPAND, TRANSITIONS_FIELDS);
             try (CloseableHttpResponse response = executeGet(uriBuilder)) {
                 int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == HttpURLConnection.HTTP_OK) {

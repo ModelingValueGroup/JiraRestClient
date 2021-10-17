@@ -1,6 +1,6 @@
 package de.micromata.jira.rest.core.domain.meta;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 /**
  * Created by cschulc on 16.03.16.

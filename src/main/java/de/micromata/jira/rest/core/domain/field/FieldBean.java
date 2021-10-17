@@ -1,10 +1,9 @@
 package de.micromata.jira.rest.core.domain.field;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
-import de.micromata.jira.rest.core.domain.BaseBean;
+import com.google.gson.annotations.*;
+import de.micromata.jira.rest.core.domain.*;
 
 public class FieldBean extends BaseBean {
     @Expose

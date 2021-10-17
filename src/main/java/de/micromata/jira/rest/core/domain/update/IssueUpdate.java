@@ -1,10 +1,8 @@
 package de.micromata.jira.rest.core.domain.update;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 /**
  * User: Christian Schulze

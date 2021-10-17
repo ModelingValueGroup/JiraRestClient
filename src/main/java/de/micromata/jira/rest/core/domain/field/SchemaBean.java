@@ -1,6 +1,6 @@
 package de.micromata.jira.rest.core.domain.field;
 
-import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.*;
 
 
 public class SchemaBean {

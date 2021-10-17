@@ -1,7 +1,6 @@
 package de.micromata.jira.rest.core.domain.permission;
 
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.*;
 
 /**
  * User: Christian Schulze (c.schulze@micromata.de)
